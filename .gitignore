@@ -1,0 +1,20 @@
+# Cached python files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment and dependency files
+venv/
+*.env
+
+# Database
+migrations/
+db.sqlite3
+
+# Key files
+*.key
+
+# Log files
+*.log
+*.pot
+*.pid
