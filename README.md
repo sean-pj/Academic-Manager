@@ -10,4 +10,8 @@
     * Mac/Linux: `source venv/bin/activate`
 5. Run `pip install -r requirements.txt` (while in the venv)
 6. Do whatever django stuff you need to do  
+
 Run `deactivate` to the leave the virtual environment
+
+If you want to run the django commands in Vscode terminal use:
+`Ctrl + Shift + P` type `Python: Select Interpreter` and select the venv version
