@@ -17,3 +17,6 @@ db.sqlite3
 *.log
 *.pot
 *.pid
+
+# Mac Finder 
+*.DS_Store
