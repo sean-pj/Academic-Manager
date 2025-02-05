@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'teachers',
-    'students'
+    'students',
+    'courses'
 ]
 
 MIDDLEWARE = [
@@ -62,6 +63,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, "core/templates"),
             os.path.join(BASE_DIR, "teachers/templates"),
             os.path.join(BASE_DIR, "students/templates"),
+            os.path.join(BASE_DIR, "courses/templates")
         ],
         'APP_DIRS': True,
         'OPTIONS': {
