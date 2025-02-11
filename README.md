@@ -24,6 +24,15 @@ If you want to run the django commands in Vscode terminal use:
 4. Run `py manage.py runserver` (might be python not py for mac)
 5. Click on the link to view the site (Usually `http://127.0.0.1:8000/`)
 
+## Running React
+
+1. Make sure you have **Node.js + npm** installed and the repo is cloned. You can verify your Node.js and npm installation by simply running `node -v` and `npm -v` in the terminal. If you get version numbers as the output, you're good to go.
+2. Make sure your repo is up-to-date by running `git pull origin main` in the terminal. 
+3. Navigate into the classroom-app directory by running `cd classroom-app`
+4. Once you're in the react app folder, run `npm install` in the terminal. This will install all the required dependancies.
+5. Now you're able to run the development server with `npm start dev`
+6. You can now make start making changes locally to the React app. Vite will automatically reload the app in the browser whenever you save your changes.
+
 ## Commit Guidelines
 
 Make your commits following [these conventions](https://www.conventionalcommits.org/en/v1.0.0/)
