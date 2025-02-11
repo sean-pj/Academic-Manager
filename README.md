@@ -30,7 +30,7 @@ If you want to run the django commands in Vscode terminal use:
 2. Make sure your repo is up-to-date by running `git pull origin main` in the terminal. 
 3. Navigate into the classroom-app directory by running `cd classroom-app`
 4. Once you're in the react app folder, run `npm install` in the terminal. This will install all the required dependancies.
-5. Now you're able to run the development server with `npm start dev`
+5. Now you're able to run the development server with `npm run dev`
 6. You can now make start making changes locally to the React app. Vite will automatically reload the app in the browser whenever you save your changes.
 
 ## Commit Guidelines
