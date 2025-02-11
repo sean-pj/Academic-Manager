@@ -33,6 +33,14 @@ If you want to run the django commands in Vscode terminal use:
 5. Now you're able to run the development server with `npm run dev`
 6. You can now make start making changes locally to the React app. Vite will automatically reload the app in the browser whenever you save your changes.
 
+# How to Test Django Models
+
+1. Make sure you have the database set up using `py manage.py migrate`
+2. Create an admin user using `py manage.py createsuperuser` (just put in any information for the username, password, etc. The database is not pushed to github and you can always reset everything if you mess up)
+3. Run django using `py manage.py runserver` and go to `http://127.0.0.1:8000/admin/`
+4. Use the username and password you created earlier
+5. Use the GUI to create and test the models
+
 ## Commit Guidelines
 
 Make your commits following [these conventions](https://www.conventionalcommits.org/en/v1.0.0/)
