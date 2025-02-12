@@ -86,6 +86,11 @@ TEMPLATES = [
     },
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
+
+
 WSGI_APPLICATION = 'academic_manager.wsgi.application'
 
 
