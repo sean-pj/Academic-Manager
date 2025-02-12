@@ -35,11 +35,13 @@ If you want to run the django commands in Vscode terminal use:
 
 ## How to Test Django Models
 
-1. Make sure you have the database set up using `py manage.py migrate`
+1. Make sure you have the database set up using `py manage.py makemigrations` then `py manage.py migrate`
 2. Create an admin user using `py manage.py createsuperuser` (just put in any information for the username, password, etc. The database is not pushed to github and you can always reset everything if you mess up)
 3. Run django using `py manage.py runserver` and go to `http://127.0.0.1:8000/admin/`
 4. Use the username and password you created earlier
 5. Use the GUI to create and test the models
+
+Note: every time you update a model, you need to run `py manage.py makemigrations` and `py manage.py migrate` to update the db.
 
 ## Commit Guidelines
 
