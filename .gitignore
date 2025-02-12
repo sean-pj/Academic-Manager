@@ -20,3 +20,6 @@ db.sqlite3
 
 # Mac Finder 
 *.DS_Store
+
+# Migrations
+**/migrations/*.py
