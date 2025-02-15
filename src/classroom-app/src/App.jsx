@@ -1,35 +1,103 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import "./App.css";
+import { get } from "./services/api";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [selectedSection, setSelectedSection] = useState("dashboard");
+  const [courses, setCourses] = useState([]);
+  const [grades, setGrades] = useState([]);
+  const [assignments, setAssignments] = useState([]);
+
+  // Fetch data for the selected section when it's clicked
+  const fetchData = (section) => {
+    if (section === "courses") {
+      get("/courses/").then((data) => setCourses(data));
+    } else if (section === "grades") {
+      // Simulated grades data
+      const simulatedGrades = [
+        { id: 1, courseName: "Basic Math", grade: "A" },
+        { id: 2, courseName: "Science Experiments", grade: "B" },
+        { id: 3, courseName: "Creative Writing", grade: "A-" },
+      ];
+      setGrades(simulatedGrades);
+    } else if (section === "assignments") {
+      // Simulated assignments data
+      const simulatedAssignments = [
+        { id: 1, title: "Math Homework", dueDate: "2023-10-15" },
+        { id: 2, title: "Science Project", dueDate: "2023-10-20" },
+        { id: 3, title: "Essay Draft", dueDate: "2023-10-18" },
+      ];
+      setAssignments(simulatedAssignments);
+    }
+  };
+
+  // Render content based on the selected section
+  const renderSectionContent = () => {
+    if (selectedSection === "courses") {
+      return (
+        <>
+          <h2>Your Courses</h2>
+          <ul>
+            {courses.map((course) => (
+              <li key={course.id}>{course.name}</li>
+            ))}
+          </ul>
+        </>
+      );
+    } else if (selectedSection === "grades") {
+      return (
+        <>
+          <h2>Your Grades</h2>
+          <ul>
+            {grades.map((grade) => (
+              <li key={grade.id}>
+                {grade.courseName}: {grade.grade}
+              </li>
+            ))}
+          </ul>
+        </>
+      );
+    } else if (selectedSection === "assignments") {
+      return (
+        <>
+          <h2>Your Assignments</h2>
+          <ul>
+            {assignments.map((assignment) => (
+              <li key={assignment.id}>
+                {assignment.title} - Due: {assignment.dueDate}
+              </li>
+            ))}
+          </ul>
+        </>
+      );
+    } else {
+      return <h2>Welcome to Your Dashboard</h2>;
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app-container">
+      <header>
+        <h1>Student Dashboard</h1>
+        <nav>
+          <button onClick={() => { setSelectedSection("courses"); fetchData("courses"); }}>
+            Courses
+          </button>
+          <button onClick={() => { setSelectedSection("grades"); fetchData("grades"); }}>
+            Grades
+          </button>
+          <button onClick={() => { setSelectedSection("assignments"); fetchData("assignments"); }}>
+            Assignments
+          </button>
+          <button onClick={() => setSelectedSection("dashboard")}>Dashboard</button>
+        </nav>
+      </header>
+
+      <main>
+        {renderSectionContent()}
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
