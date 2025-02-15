@@ -8,12 +8,11 @@ function App() {
   const [grades, setGrades] = useState([]);
   const [assignments, setAssignments] = useState([]);
 
-  // Fetch data for the selected section when it's clicked
+  // Fetch data for the selected section
   const fetchData = (section) => {
     if (section === "courses") {
       get("/courses/").then((data) => setCourses(data));
     } else if (section === "grades") {
-      // Simulated grades data
       const simulatedGrades = [
         { id: 1, courseName: "Basic Math", grade: "A" },
         { id: 2, courseName: "Science Experiments", grade: "B" },
@@ -21,7 +20,6 @@ function App() {
       ];
       setGrades(simulatedGrades);
     } else if (section === "assignments") {
-      // Simulated assignments data
       const simulatedAssignments = [
         { id: 1, title: "Math Homework", dueDate: "2023-10-15" },
         { id: 2, title: "Science Project", dueDate: "2023-10-20" },
@@ -31,7 +29,7 @@ function App() {
     }
   };
 
-  // Render content based on the selected section
+  // Render section content
   const renderSectionContent = () => {
     if (selectedSection === "courses") {
       return (
@@ -93,9 +91,7 @@ function App() {
         </nav>
       </header>
 
-      <main>
-        {renderSectionContent()}
-      </main>
+      <main>{renderSectionContent()}</main>
     </div>
   );
 }

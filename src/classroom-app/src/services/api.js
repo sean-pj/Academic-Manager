@@ -19,10 +19,8 @@ const mockApiRequest = (endpoint) => {
       const cleanEndpoint = endpoint.replace(/^\/|\/$/g, "");
 
       if (stubData[cleanEndpoint]) {
-        // Return only the requested stub endpoint data
         resolve({ data: stubData[cleanEndpoint] });
       } else {
-        // Handle unknown endpoints
         resolve({ data: [], message: "No stub data found" });
       }
     }, 1000); // Simulated 1-second API fetch delay
