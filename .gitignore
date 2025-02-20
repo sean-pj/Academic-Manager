@@ -18,8 +18,10 @@ db.sqlite3
 *.pot
 *.pid
 
-# Mac Finder 
+# Eclipse Files
 *.DS_Store
+*.project
+*.pydevproject
 
 # Migrations
 **/migrations/*.py
