@@ -1,10 +1,11 @@
 from django.db import models
-from core.models import *
+from django.contrib.auth.models import User
 from teachers.models import *
 
 # Create your models here.
 class Student(models.Model):
-    name = models.TextField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True, blank=True)
+    date_of_birth = models.DateField(null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.user.username}"
