@@ -9,4 +9,4 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ['title', 'students', 'teachers']
+        fields = '__all__'

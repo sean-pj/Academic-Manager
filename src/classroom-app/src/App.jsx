@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import { get } from "./services/api";
+import Courses from "./Courses.jsx"
 
 function App() {
   const [selectedSection, setSelectedSection] = useState("dashboard");
@@ -35,11 +36,7 @@ function App() {
       return (
         <>
           <h2>Your Courses</h2>
-          <ul>
-            {courses.map((course) => (
-              <li key={course.id}>{course.name}</li>
-            ))}
-          </ul>
+          <Courses></Courses>
         </>
       );
     } else if (selectedSection === "grades") {

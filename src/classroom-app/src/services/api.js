@@ -1,7 +1,7 @@
 import axios from "axios";
 import stubData from "./stubData";
 
-const USE_STUB_DATA = true; // Set to false to use real API
+const USE_STUB_DATA = false; // Set to false to use real API
 const API_BASE_URL = "http://127.0.0.1:8000/api";
 
 const api = axios.create({

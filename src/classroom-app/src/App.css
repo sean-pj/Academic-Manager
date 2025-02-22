@@ -14,6 +14,7 @@ header {
 
 header h1 {
   margin: 0; /* Remove default margin from h1 */
+  color: black;
 }
 
 nav {
@@ -41,6 +42,7 @@ main {
   flex: 1;
   padding: 20px;
   background-color: #fff;
+  color: black;
   text-align: center; /* Center the main content */
 }
 
