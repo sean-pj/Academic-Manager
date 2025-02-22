@@ -1,53 +1,39 @@
 .app-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  column-gap: 10px;
   height: 100vh;
-  padding: 20px; /* Add padding to the entire container */
 }
 
 header {
-  background-color: #f8f9fa;
-  padding: 10px;
+  margin-left: 10px;
   text-align: center; /* Center the header content */
   margin-bottom: 20px; /* Add space below the header */
 }
 
-header h1 {
-  margin: 0; /* Remove default margin from h1 */
-  color: black;
+.header-btns {
+  display: grid;
+  row-gap: 5px;
+  grid-template-columns: 1fr 3fr;
+  align-items: center;
 }
 
-nav {
-  display: flex;
-  justify-content: center; /* Center the navigation buttons */
-  gap: 10px; /* Add space between buttons */
-  margin-bottom: 20px; /* Add space below the navigation */
+.header-btns > img {
+  height: 2rem;
+  width: auto;
+  justify-self: center;
 }
 
-nav button {
-  padding: 10px 20px; /* Increase button padding */
-  cursor: pointer;
-  border: none;
+.header-btns > button {
+  border: 1px solid transparent;
   background-color: #007bff; /* Blue background */
   color: white; /* White text */
   border-radius: 5px; /* Rounded corners */
   transition: background-color 0.3s ease; /* Smooth hover effect */
 }
 
-nav button:hover {
+.header-btns > button:hover {
   background-color: #0056b3; /* Darker blue on hover */
-}
-
-main {
-  flex: 1;
-  padding: 20px;
-  background-color: #fff;
-  color: black;
-  text-align: center; /* Center the main content */
-}
-
-h2 {
-  margin: 0 0 10px 0;
 }
 
 ul {

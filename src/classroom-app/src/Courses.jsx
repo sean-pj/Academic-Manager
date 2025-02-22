@@ -19,12 +19,6 @@ function Courses() {
       getData();
     }, []);
 
-    useEffect(() => {
-      if (courses[0]) {
-        console.log(courses[0].students)
-      }
-    }, [courses]);
-
     return (
         <>
         {courses.map(course => (

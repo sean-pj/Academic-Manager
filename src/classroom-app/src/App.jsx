@@ -5,14 +5,13 @@ import Courses from "./Courses.jsx"
 
 function App() {
   const [selectedSection, setSelectedSection] = useState("dashboard");
-  const [courses, setCourses] = useState([]);
   const [grades, setGrades] = useState([]);
   const [assignments, setAssignments] = useState([]);
 
   // Fetch data for the selected section
   const fetchData = (section) => {
     if (section === "courses") {
-      get("/courses/").then((data) => setCourses(data));
+      //
     } else if (section === "grades") {
       const simulatedGrades = [
         { id: 1, courseName: "Basic Math", grade: "A" },
@@ -74,17 +73,21 @@ function App() {
     <div className="app-container">
       <header>
         <h1>Student Dashboard</h1>
-        <nav>
+        <nav className="header-btns">
+          <img src="\src\assets\dashboard.svg"></img>
+          <button onClick={() => setSelectedSection("dashboard")}>Dashboard</button>
+          <img src="\src\assets\courses.svg"></img>
           <button onClick={() => { setSelectedSection("courses"); fetchData("courses"); }}>
             Courses
           </button>
+          <img src="\src\assets\grades.svg"></img>
           <button onClick={() => { setSelectedSection("grades"); fetchData("grades"); }}>
             Grades
           </button>
+          <img src="\src\assets\assign.svg"></img>
           <button onClick={() => { setSelectedSection("assignments"); fetchData("assignments"); }}>
             Assignments
           </button>
-          <button onClick={() => setSelectedSection("dashboard")}>Dashboard</button>
         </nav>
       </header>
 
