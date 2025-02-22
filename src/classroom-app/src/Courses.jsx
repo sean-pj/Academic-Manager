@@ -19,12 +19,28 @@ function Courses() {
       getData();
     }, []);
 
+    useEffect(() => {
+      if (courses[0]) {
+        console.log(courses[0].students)
+      }
+    }, [courses]);
+
     return (
-        <ul>
-          {courses.map(course => (
-            <li key={course.id}>{course.title}</li>
+        <>
+        {courses.map(course => (
+            <div key="course-info">
+              <div key={course.id}>{course.title}</div>
+              <h3>Students:</h3>
+              {course.students.map(student => (
+                <div key={student.id}>{student.username}</div>
+              ))}
+              <h3>Teachers:</h3>
+              {course.teachers.map(teacher => (
+                <div key={teacher.id}>{teacher.username}</div>
+              ))}
+            </div>
           ))}
-        </ul>
+        </>
     )
 }
 
