@@ -20,19 +20,23 @@ function Courses() {
 
   return (
     <>
-      {courses.map((course) => (
-        <div key="course-info">
-          <div key={course.id}>{course.title}</div>
-          <h3>Students:</h3>
-          {course.students.map((student) => (
-            <div key={student.id}>{student.username}</div>
-          ))}
-          <h3>Teachers:</h3>
-          {course.teachers.map((teacher) => (
-            <div key={teacher.id}>{teacher.username}</div>
-          ))}
-        </div>
-      ))}
+      {courses.length === 0 ? (
+        <p>No courses yet! Talk with your teacher.</p>
+      ) : (
+        courses.map((course) => (
+          <div key="course-info">
+            <div key={course.id}>{course.title}</div>
+            <h3>Students:</h3>
+            {course.students.map((student) => (
+              <div key={student.id}>{student.username}</div>
+            ))}
+            <h3>Teachers:</h3>
+            {course.teachers.map((teacher) => (
+              <div key={teacher.id}>{teacher.username}</div>
+            ))}
+          </div>
+        ))
+      )}
     </>
   );
 }

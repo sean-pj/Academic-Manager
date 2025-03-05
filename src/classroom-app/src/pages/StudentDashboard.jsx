@@ -1,12 +1,23 @@
 import { useState, useEffect } from "react";
-import styles from "./StudentDashboard.module.css";
 import { get } from "../services/api.js";
 import Courses from "../components/Courses.jsx";
+import NavigationButton from "../components/NavigationButton.jsx";
+import ExperienceBar from "../components/ExperienceBar.jsx";
+import HomeworkItem from "../components/HomeworkItem.jsx";
+import GradeItem from "../components/GradeItem.jsx";
 
 function StudentDashboard() {
   const [selectedSection, setSelectedSection] = useState("dashboard");
   const [grades, setGrades] = useState([]);
   const [assignments, setAssignments] = useState([]);
+
+  // Get the date
+  const today = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
   // Fetch data for the selected section
   const fetchData = (section) => {
@@ -34,7 +45,7 @@ function StudentDashboard() {
     if (selectedSection === "courses") {
       return (
         <>
-          <h2>Your Courses</h2>
+          <h2>Your Classes</h2>
           <Courses></Courses>
         </>
       );
@@ -42,73 +53,88 @@ function StudentDashboard() {
       return (
         <>
           <h2>Your Grades</h2>
-          <ul>
+          <div className="py-4 flex flex-col gap-5">
             {grades.map((grade) => (
-              <li key={grade.id}>
-                {grade.courseName}: {grade.grade}
-              </li>
+              <GradeItem
+                key={grade.id}
+                title={grade.courseName}
+                mark={grade.grade}
+              />
             ))}
-          </ul>
+          </div>
         </>
       );
     } else if (selectedSection === "assignments") {
       return (
         <>
-          <h2>Your Assignments</h2>
-          <ul>
+          <h2>Your Homework</h2>
+          <div className="py-4 flex flex-col gap-5">
             {assignments.map((assignment) => (
-              <li key={assignment.id}>
-                {assignment.title} - Due: {assignment.dueDate}
-              </li>
+              <HomeworkItem
+                key={assignment.id}
+                title={assignment.title}
+                dueDate={assignment.dueDate}
+              />
             ))}
-          </ul>
+          </div>
         </>
       );
     } else {
-      return <h2>Welcome to Your Dashboard</h2>;
+      return (
+        <>
+          <h2>Welcome, Student!</h2>
+          <p className="text-gray-600">Today is {today}</p>
+          <ExperienceBar />
+        </>
+      );
     }
   };
 
   return (
-    <div className={styles.main}>
-      <header className={styles.header}>
-        <h1>Student Dashboard</h1>
-        <nav className={styles.headerBtns}>
-          <img src="\src\assets\dashboard.svg"></img>
-          <button onClick={() => setSelectedSection("dashboard")}>
-            Dashboard
-          </button>
-          <img src="\src\assets\courses.svg"></img>
-          <button
+    <div>
+      <div>
+        {/* <h1>Student Dashboard</h1> */}
+        <nav className="w-full p-4 flex justify-center gap-5 border-b-2 border-gray-200">
+          <NavigationButton
+            imgSrc="\src\assets\school.svg"
+            onClick={() => setSelectedSection("dashboard")}
+            other={"bg-green-400 text-black"}
+            text="HOME"
+          />
+
+          <NavigationButton
+            imgSrc="\src\assets\folder-open.svg"
             onClick={() => {
               setSelectedSection("courses");
               fetchData("courses");
             }}
-          >
-            Courses
-          </button>
-          <img src="\src\assets\grades.svg"></img>
-          <button
+            other={"bg-blue-400 text-black"}
+            text="COURSES"
+          />
+
+          <NavigationButton
+            imgSrc="\src\assets\book-check.svg"
             onClick={() => {
               setSelectedSection("grades");
               fetchData("grades");
             }}
-          >
-            Grades
-          </button>
-          <img src="\src\assets\assign.svg"></img>
-          <button
+            other={"bg-red-400 text-black"}
+            text="GRADES"
+          />
+
+          <NavigationButton
+            imgSrc="\src\assets\notebook-pen.svg"
             onClick={() => {
               setSelectedSection("assignments");
               fetchData("assignments");
             }}
-          >
-            Assignments
-          </button>
+            other={"bg-orange-300 text-black"}
+            text="HOMEWORK"
+          />
         </nav>
-      </header>
+      </div>
 
-      <main>{renderSectionContent()}</main>
+      <main className="p-8">{renderSectionContent()}</main>
     </div>
   );
 }

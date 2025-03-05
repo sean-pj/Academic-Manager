@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
-import styles from './App.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function App() {
-
   const navigate = useNavigate();
 
   const handleClick = (path) => {
@@ -14,8 +12,20 @@ function App() {
     <div className={styles.main}>
       <h1>Home Page</h1>
       <div className={styles.btns}>
-        <button onClick={() => {handleClick('/student')}}>Student Dashboard</button>
-        <button onClick={() => {handleClick('/teacher')}}>Teacher Dashboard</button>
+        <button
+          onClick={() => {
+            handleClick("/student");
+          }}
+        >
+          Student Dashboard
+        </button>
+        <button
+          onClick={() => {
+            handleClick("/teacher");
+          }}
+        >
+          Teacher Dashboard
+        </button>
       </div>
     </div>
   );
