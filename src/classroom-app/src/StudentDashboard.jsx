@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./App.css";
+import styles from "./StudentDashboard.module.css";
 import { get } from "./services/api";
 import Courses from "./Courses.jsx"
 
@@ -70,10 +70,10 @@ function StudentDashboard () {
   };
 
   return (
-    <div className="app-container">
-      <header>
+    <div className={styles.main}>
+      <header className={styles.header}>
         <h1>Student Dashboard</h1>
-        <nav className="header-btns">
+        <nav className={styles.headerBtns}>
           <img src="\src\assets\dashboard.svg"></img>
           <button onClick={() => setSelectedSection("dashboard")}>Dashboard</button>
           <img src="\src\assets\courses.svg"></img>
