@@ -1,7 +1,12 @@
 .main {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center; 
     align-items: center;
     height: 100vh;
+}
+
+.btns {
+    display: flex;
+    column-gap: 50px;
 }
