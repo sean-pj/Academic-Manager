@@ -1,10 +1,10 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import './index.css';
-import App from './App.jsx';
-import StudentDashboard from './StudentDashboard.jsx';
-import TeacherDashboard from './TeacherDashboard.jsx';
+import "./index.css";
+import App from "./App.jsx";
+import StudentDashboard from "./pages/StudentDashboard.jsx";
+import TeacherDashboard from "./pages/TeacherDashboard.jsx";
 
 const router = createBrowserRouter([
   {
@@ -12,13 +12,13 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/student" ,
+    path: "/student",
     element: <StudentDashboard></StudentDashboard>,
-  }, 
+  },
   {
     path: "/teacher",
-    element: <TeacherDashboard></TeacherDashboard>
-  }
+    element: <TeacherDashboard></TeacherDashboard>,
+  },
 ]);
 
 createRoot(document.getElementById("root")).render(
