@@ -9,9 +9,9 @@ function App() {
   };
 
   return (
-    <div className={styles.main}>
+    <div>
       <h1>Home Page</h1>
-      <div className={styles.btns}>
+      <div>
         <button
           onClick={() => {
             handleClick("/student");
