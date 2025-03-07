@@ -30,7 +30,7 @@ function App() {
         <p className="text-2xl font-semibold text-green-500 mb-4">enhance your classroom experience</p>
         
         {/* "I am a" Text */}
-        <p className="text-5xl font-semibold mb-4">I am a</p>
+        <p className="text-3xl font-semibold mb-4">I am a</p>
         
         {/* Buttons Component */}
         <Buttons />
