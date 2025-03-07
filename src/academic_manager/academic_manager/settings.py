@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'core',
     'teachers',
     'students',
-    'courses'
+    'courses',
+    'classroom'
 ]
 
 REST_FRAMEWORK = {
@@ -72,7 +73,8 @@ TEMPLATES = [
             os.path.join(BASE_DIR, "core/templates"),
             os.path.join(BASE_DIR, "teachers/templates"),
             os.path.join(BASE_DIR, "students/templates"),
-            os.path.join(BASE_DIR, "courses/templates")
+            os.path.join(BASE_DIR, "courses/templates"),
+            os.path.join(BASE_DIR, "classroom/templates")
         ],
         'APP_DIRS': True,
         'OPTIONS': {

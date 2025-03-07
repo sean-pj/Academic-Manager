@@ -35,5 +35,6 @@ urlpatterns = [
     path('teachers/', include("teachers.urls")),
     path('students/', include("students.urls")),
     path('courses/', include("courses.urls")),
+    path("classroom/", include("classroom.urls")),
     path('api/', include(router.urls))
 ]
