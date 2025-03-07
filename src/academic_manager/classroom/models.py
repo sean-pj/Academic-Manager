@@ -1,6 +1,7 @@
 from django.db import models
 from teachers.models import *
 from students.models import *
+from assignment.models import *
 
 # Create your models here.
 class Classroom(models.Model):
@@ -10,6 +11,7 @@ class Classroom(models.Model):
     # One teacher per classroom, once teacher is removed (students associated with that classroom lose their reference to that classroom)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)  
     students = models.ManyToManyField(Student)  # Multiple students per classroom (ManyToManyField)
+    assignments = models.ManyToManyField(Assignment)  # Multiple assignments per classroom (ManyToManyField)
     schedule = models.CharField(max_length=255) # Stores the schedule (ex. weekdays 11-12) - subject to change
 
     def __str__(self):
