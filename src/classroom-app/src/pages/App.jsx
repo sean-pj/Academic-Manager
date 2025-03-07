@@ -24,10 +24,10 @@ function App() {
       <div className="flex flex-col items-center justify-center h-screen mt-[-100px] text-center">
         {/* Welcome Text */}
         <p className="text-8xl font-bold mb-2">
-          <span className="text-black">Welcome to</span> <span className="text-green-500">greenbar</span>
+          <span className="text-black">Welcome to</span> <span className="text-green-600">greenbar</span>
         </p>
         {/* Subheading */}
-        <p className="text-4xl font-semibold text-green-500 mb-4">enhance your classroom experience</p>
+        <p className="text-4xl font-semibold text-green-600 mb-4">enhance your classroom experience</p>
         
         {/* "I am a" Text */}
         <p className="text-3xl font-semibold mb-4">I am a</p>
