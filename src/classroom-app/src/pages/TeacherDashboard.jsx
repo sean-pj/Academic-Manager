@@ -153,9 +153,16 @@ function TeacherDashboard() {
             other={"bg-orange-300 text-black"}
             text="ANALYTICS"
           />
+           <NavigationButton
+            imgSrc="\src\assets\manage.svg"
+            onClick={() => {
+              setSelectedSection("manage");
+            }}
+            other={"bg-purple-300 text-black"}
+            text="MANAGE"
+          />
         </nav>
       </div>
-
       <main className="p-8">{renderSectionContent()}</main>
     </div>
   );
