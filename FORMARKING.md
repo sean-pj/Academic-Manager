@@ -1,6 +1,6 @@
 # README
 
-Here are some instructions for marking our ITR2:
+Here are some instructions for checking our DB using SQLite.
 
 ## Packages
 
@@ -23,6 +23,7 @@ Note: the `py` part of the command can be different depending on the system (can
 Most commands should be similar to normal SQL
 
 1. Open SQLite in terminal or open sqlite3.exe
+2. open the db using `.open db.sqlite3`
 2. `.tables` to view headers
 
 ### Example
@@ -30,4 +31,4 @@ Most commands should be similar to normal SQL
 * `SELECT * from students_student;` selects student models. The relationship to its user will be shown as an ID in the user_id column
 * `SELECT * from teachers_teacher;` selects student models. The relationship to its user will be shown as an ID in the user_id column
 * `SELECT * FROM auth_user WHERE id = 41` select a specific id
-* `SELECT * from courses_course_students` to view the many_to_many relationship with students or `SELECT * from courses_course_teachers` to view the many_to_many relationship with teachers. Only shows student and teacher id's
+* `SELECT * from courses_course_students` to view the many_to_many relationship with students or `SELECT * from courses_course_teachers` to view the many_to_many relationship with teachers. Only shows student and teacher ids
