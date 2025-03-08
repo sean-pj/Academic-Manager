@@ -2,14 +2,17 @@ from django.test import TestCase
 from .models import Course
 from students.models import Student
 from teachers.models import Teacher
+from django.contrib.auth.models import User
 
 # Create your tests here.
 class CourseTestCase(TestCase):
     def setUp(self):
         c1 = Course.objects.create(title="Math")
         c2 = Course.objects.create(title="English")
-        t1 = Teacher.objects.create(name="Timothee")
-        s1 = Student.objects.create(name="Nathan")
+        timo = User.objects.create(username="Timothee")
+        t1 = Teacher.objects.create(user=timo)
+        nathan = User.objects.create(username="Nathan")
+        s1 = Student.objects.create(user=nathan)
         c1.teachers.add(t1)
         c1.students.add(s1)
 
@@ -21,16 +24,19 @@ class CourseTestCase(TestCase):
 
     def test_teachers(self):
         c1 = Course.objects.get(title="Math")
-        t1 = Teacher.objects.get(name="Timothee")
+        timo = User.objects.get(username="Timothee")
+        t1 = Teacher.objects.get(user=timo)
         self.assertEqual(c1.teachers.first(), t1)
     
     def test_students(self):
         c1 = Course.objects.get(title="Math")
-        s1 = Student.objects.get(name="Nathan")
+        nathan = User.objects.get(username="Nathan")
+        s1 = Student.objects.get(user=nathan)
         self.assertEqual(c1.students.first(), s1)
     
     def test_count(self):
         c1 = Course.objects.get(title="Math")
-        s1 = Student.objects.create(name="TJ")
+        tj = User.objects.create(username="TJ")
+        s1 = Student.objects.create(user=tj)
         c1.students.add(s1)
         self.assertEqual(c1.students.count(), 2)
