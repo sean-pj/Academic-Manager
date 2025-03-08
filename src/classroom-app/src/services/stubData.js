@@ -57,6 +57,13 @@ const stubData = {
       studentsEnrolled: [1, 2, 4],
     },
   ],
+  analytics: [
+    { id: 1, name: "Emma Johnson", currentGrade: 92, level: 5, xp: 1500, badges: ["Math Whiz", "Creative Thinker"] },
+    { id: 2, name: "Liam Smith", currentGrade: 88, level: 4, xp: 1200, badges: ["Science Explorer"] },
+    { id: 3, name: "Sophia Brown", currentGrade: 95, level: 6, xp: 1800, badges: ["Writing Star", "History Buff"] },
+    { id: 4, name: "Noah Williams", currentGrade: 79, level: 3, xp: 900, badges: ["Diligent Learner"] },
+    { id: 5, name: "Olivia Davis", currentGrade: 85, level: 4, xp: 1100, badges: ["Music Enthusiast", "Participation Pro"] },
+  ],
 };
 
 export default stubData;
