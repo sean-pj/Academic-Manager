@@ -1,5 +1,7 @@
 # Academic-Manager
  
+**ITR2/FORMARKING.md has instructions for checking the db using SQL**
+
 ## Installing Python Packages
 
 1. Make sure you have **Python and Pip** installed and the repo cloned
