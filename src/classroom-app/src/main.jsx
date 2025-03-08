@@ -6,6 +6,7 @@ import "./index.css";
 import App from "./pages/App.jsx";
 import StudentDashboard from "./pages/StudentDashboard.jsx";
 import TeacherDashboard from "./pages/TeacherDashboard.jsx";
+import Login from './pages/Login';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/teacher",
     element: <TeacherDashboard></TeacherDashboard>,
+  },
+  {
+    path: "/login",  
+    element: <Login />,
   },
 ]);
 

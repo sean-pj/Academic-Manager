@@ -1,10 +1,15 @@
-// src/components/HeaderButtons.jsx
 import React from 'react';
-// Import the SVG files as image URLs
+import { useNavigate } from 'react-router-dom';
 import userIcon from '../assets/user.svg';
 import userPlusIcon from '../assets/user-plus.svg';
 
 function HeaderButtons() {
+  const navigate = useNavigate();
+
+  const handleClick = (path) => {
+    navigate(path);
+  };
+
   return (
     <div className="flex space-x-4">
       <button className="text-black hover:text-green-600 bg-transparent border-none flex items-center gap-2">
@@ -16,13 +21,12 @@ function HeaderButtons() {
       <button className="text-black hover:text-green-600 bg-transparent border-none flex items-center gap-2">
         Support
       </button>
-      <button className="text-black hover:text-green-600 bg-transparent border-none flex items-center gap-2">
-        {/* Login button with icon */}
+      <button className="text-black hover:text-green-600 bg-transparent border-none flex items-center gap-2"
+      onClick={() => handleClick("/login")}>
         <img src={userIcon} alt="Login" className="w-5 h-5" />
         Login
       </button>
       <button className="text-black hover:text-green-600 bg-transparent border-none flex items-center gap-2">
-        {/* Signup button with icon */}
         <img src={userPlusIcon} alt="Signup" className="w-5 h-5" />
         Signup
       </button>
@@ -31,6 +35,7 @@ function HeaderButtons() {
 }
 
 export default HeaderButtons;
+
 
 
 
