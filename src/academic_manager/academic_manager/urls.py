@@ -21,14 +21,14 @@ from django.urls import path, include
 from students.views import StudentViewSet
 from courses.views import CourseViewSet
 from teachers.views import TeacherViewSet
-from core.views import CoreViewSet
+from core.views import UserViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'students', StudentViewSet)
 router.register(r'teachers', TeacherViewSet)
 router.register(r'courses', CourseViewSet)
-router.register(r'users', CoreViewSet)
+router.register(r'users', UserViewSet)
 
 # JWT Authentication
 from rest_framework_simplejwt import views as jwt_views

@@ -3,6 +3,7 @@ import { get } from "../services/api.js";
 import NavigationButton from "../components/NavigationButton.jsx";
 import HomeworkItem from "../components/HomeworkItem.jsx";
 import GradeItem from "../components/GradeItem.jsx";
+import CourseItem from "../components/CourseItem.jsx";
 
 function TeacherDashboard() {
   const [selectedSection, setSelectedSection] = useState("dashboard");
@@ -54,7 +55,7 @@ function TeacherDashboard() {
       return (
         <>
           <h2>Your Classes</h2>
-          <Courses></Courses>
+          <CourseItem></CourseItem>
         </>
       );
     } else if (selectedSection === "grades") {

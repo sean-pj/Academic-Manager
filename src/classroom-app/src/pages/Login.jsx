@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import axios from "axios";
+import api from "../services/api.js"
+import { useNavigate } from 'react-router-dom';
+
+
 function Login() {
+  const navigate = useNavigate();
   const [usernameOrEmail, setUsernameOrEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -8,7 +12,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/token/", {
+      const response = await api.post("/token/", {
         username: usernameOrEmail,
         password: password,
       });
@@ -60,7 +64,7 @@ function Login() {
           <a
             href="#"
             className="text-green-600 hover:text-green-700"
-            onClick={() => alert('Register page here')}
+            onClick={() => navigate('/signup')}
           >
             Register
           </a>
@@ -71,5 +75,3 @@ function Login() {
 }
 
 export default Login;
-
-

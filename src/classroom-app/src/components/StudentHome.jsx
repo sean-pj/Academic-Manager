@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import get from "../services/api.js";
+import {get} from "../services/api.js";
 
 function StudentHome() {
   const [user, setUser] = useState();

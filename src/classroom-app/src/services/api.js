@@ -86,4 +86,4 @@ export const get = async (endpoint) => {
   }
 };
 
-export default get
+export default api
