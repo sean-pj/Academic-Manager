@@ -12,15 +12,15 @@ def index(request):
 
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
     queryset = User.objects.all()
 
-    def get_permissions(self):
-        #Dynamic permissions, allow POST requests, prevent GET requests
-        if self.action in ['list', 'retrieve']: # If GET require authentication
-            return [permissions.IsAuthenticated()]
-        else:
-            return [permissions.AllowAny()] 
+    # def get_permissions(self):
+    #     #Dynamic permissions, allow POST requests, prevent GET requests
+    #     if self.action in ['create']: # If GET require authentication
+    #         return [permissions.AllowAny]
+    #     else:
+    #         return [permissions.IsAuthenticated] 
 
     def get_queryset(self):
         # Only return users that belong to the currently authenticated user
