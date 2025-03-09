@@ -6,9 +6,15 @@ function CourseItem() {
 
   // Api call
   useEffect(() => {
-    api.get("/courses/")
-    .then((data) => Array.isArray(data) ? data : setCourses)
-    .catch(console.error)
+    const getData = async () => {
+      try {
+        const result = await api.get("/courses/");
+        setCourses(result.data);
+      } catch (error) {
+        console.log("api error");
+      }
+    };
+    getData();
   }, []);
 
   return (
