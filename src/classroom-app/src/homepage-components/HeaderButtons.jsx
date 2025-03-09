@@ -26,7 +26,7 @@ function HeaderButtons() {
         <img src={userIcon} alt="Login" className="w-5 h-5" />
         Login
       </button>
-      <button className="text-black hover:text-green-600 bg-transparent border-none flex items-center gap-2">
+      <button className="text-black hover:text-green-600 bg-transparent border-none flex items-center gap-2" onClick={() => handleClick("/signup")}>
         <img src={userPlusIcon} alt="Signup" className="w-5 h-5" />
         Signup
       </button>
