@@ -70,6 +70,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),  # Access token expiration time
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),  # Refresh token expiration time
+    'ROTATE_REFRESH_TOKENS': False,  # Set to True if you want to rotate refresh tokens
+    'BLACKLIST_AFTER_ROTATION': True,  # Optional: Blacklist old refresh tokens after rotation
+}
+
 ROOT_URLCONF = 'academic_manager.urls'
 
 TEMPLATES = [

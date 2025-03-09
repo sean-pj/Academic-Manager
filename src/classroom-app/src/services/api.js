@@ -24,6 +24,30 @@ const mockApiRequest = (endpoint) => {
   });
 };
 
+const refreshAuthToken = async () => {
+  const refreshToken = localStorage.getItem('refresh_token')
+  
+  if (!refreshToken) {
+    throw new Error('No refresh token available');
+  }
+
+  try {
+    const response = await api.post("/token/refresh/", {
+      refresh: refreshToken
+    })
+
+    // Store the new access and refresh tokens in localStorage
+    localStorage.setItem('token', response.data.access);
+    //If you turn refresh token rotation on in django, this needs to be uncommented
+    //localStorage.setItem('refresh_token', response.data.refresh);
+
+    return response.data.access;  // Return the new access token
+  } catch (error) {
+    console.error('Token refresh failed', error);
+    throw error;
+  }
+};
+
 export const get = async (endpoint) => {
   try {
     if (USE_STUB_DATA) {
@@ -31,19 +55,33 @@ export const get = async (endpoint) => {
     }
 
     //Get Token
-
     const token = localStorage.getItem('token')
 
+    //Apply token if it exists
     if (token) {
       api.defaults.headers['Authorization'] = `Bearer ${token}`;
     } else {
       delete api.defaults.headers['Authorization'];
     }
 
+    //GET api response
     const response = await api.get(endpoint);
     return await response.data;
+
   } catch (error) {
-    console.error("API Error:");
+
+    // If the current access token is expired, attempt to refresh
+    if (error.response && error.response.status === 401) {
+      console.log('Access token expired. Refreshing token');
+      
+      const newToken = await refreshAuthToken();
+      api.defaults.headers['Authorization'] = `Bearer ${newToken}`;
+
+      const response = await api.get(endpoint);
+      return await response.data;
+    }
+
+    console.error('API call failed', error);
     throw error;
   }
 };
