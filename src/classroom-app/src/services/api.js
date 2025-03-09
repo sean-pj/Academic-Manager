@@ -34,7 +34,7 @@ export const get = async (endpoint) => {
     }
 
     const response = await api.get(endpoint);
-    return response.data;
+    return await response.data;
   } catch (error) {
     console.error("API Error:", error);
     throw error;

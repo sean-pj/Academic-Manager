@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { get } from "../services/api.js";
-import Courses from "../components/Courses.jsx";
 import NavigationButton from "../components/NavigationButton.jsx";
 import HomeworkItem from "../components/HomeworkItem.jsx";
 import GradeItem from "../components/GradeItem.jsx";

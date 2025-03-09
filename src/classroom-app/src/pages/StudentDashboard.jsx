@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { get } from "../services/api.js";
-import Courses from "../components/Courses.jsx";
+import CourseItem from "../components/CourseItem.jsx";
 import NavigationButton from "../components/NavigationButton.jsx";
 import ExperienceBar from "../components/ExperienceBar.jsx";
 import HomeworkItem from "../components/HomeworkItem.jsx";
@@ -10,6 +9,7 @@ function StudentDashboard() {
   const [selectedSection, setSelectedSection] = useState("dashboard");
   const [grades, setGrades] = useState([]);
   const [assignments, setAssignments] = useState([]);
+  const [courses, setCourses] = useState([]);
 
   // Get the date
   const today = new Date().toLocaleDateString("en-US", {
@@ -46,7 +46,9 @@ function StudentDashboard() {
       return (
         <>
           <h2>Your Classes</h2>
-          <Courses></Courses>
+          <div className="py-4 flex flex-col gap-5">
+            <CourseItem></CourseItem>
+          </div>
         </>
       );
     } else if (selectedSection === "grades") {
