@@ -14,3 +14,7 @@ class CoreViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
     queryset = User.objects.all()
+
+    def get_queryset(self):
+        # Only return posts that belong to the currently authenticated user
+        return User.objects.filter(id=self.request.user.id)

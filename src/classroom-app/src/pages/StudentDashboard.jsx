@@ -4,20 +4,13 @@ import NavigationButton from "../components/NavigationButton.jsx";
 import ExperienceBar from "../components/ExperienceBar.jsx";
 import HomeworkItem from "../components/HomeworkItem.jsx";
 import GradeItem from "../components/GradeItem.jsx";
+import UserProfile from "../components/StudentHome.jsx";
 
 function StudentDashboard() {
   const [selectedSection, setSelectedSection] = useState("dashboard");
   const [grades, setGrades] = useState([]);
   const [assignments, setAssignments] = useState([]);
   const [courses, setCourses] = useState([]);
-
-  // Get the date
-  const today = new Date().toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
 
   // Fetch data for the selected section
   const fetchData = (section) => {
@@ -84,11 +77,8 @@ function StudentDashboard() {
     } else {
       return (
         <>
-          <h2>Welcome, Student!</h2>
-          <p className="text-gray-600">Today is {today}</p>
+          <UserProfile></UserProfile>
           <ExperienceBar />
-
-
         </>
       );
     }
