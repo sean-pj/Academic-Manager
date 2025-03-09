@@ -18,16 +18,20 @@ from django.contrib import admin
 from django.urls import path, include
 
 #Rest
-from rest_framework.routers import DefaultRouter
 from students.views import StudentViewSet
 from courses.views import CourseViewSet
 from teachers.views import TeacherViewSet
+from core.views import CoreViewSet
+from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'students', StudentViewSet)
 router.register(r'teachers', TeacherViewSet)
 router.register(r'courses', CourseViewSet)
+router.register(r'users', CoreViewSet)
 
+# JWT Authentication
+from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,5 +39,7 @@ urlpatterns = [
     path('teachers/', include("teachers.urls")),
     path('students/', include("students.urls")),
     path('courses/', include("courses.urls")),
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('api/', include(router.urls))
 ]

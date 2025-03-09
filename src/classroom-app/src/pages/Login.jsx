@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
-
+import axios from "axios";
 function Login() {
   const [usernameOrEmail, setUsernameOrEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/api/token/", {
+        username: usernameOrEmail,
+        password: password,
+      });
+      
+      localStorage.setItem("token", response.data.access);
+      
+    } catch (err) {
+      console.log("invalid credentials")
+    }
   };
 
   return (

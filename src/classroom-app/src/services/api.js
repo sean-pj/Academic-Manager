@@ -6,9 +6,6 @@ const API_BASE_URL = "http://127.0.0.1:8000/api";
 
 const api = axios.create({
   baseURL: API_BASE_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
 });
 
 const mockApiRequest = (endpoint) => {
@@ -33,12 +30,22 @@ export const get = async (endpoint) => {
       return await mockApiRequest(endpoint);
     }
 
+    //Get Token
+
+    const token = localStorage.getItem('token')
+
+    if (token) {
+      api.defaults.headers['Authorization'] = `Bearer ${token}`;
+    } else {
+      delete api.defaults.headers['Authorization'];
+    }
+
     const response = await api.get(endpoint);
     return await response.data;
   } catch (error) {
-    console.error("API Error:", error);
+    console.error("API Error:");
     throw error;
   }
 };
 
-export default api;
+export default get

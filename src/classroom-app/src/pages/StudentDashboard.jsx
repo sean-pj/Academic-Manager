@@ -87,6 +87,8 @@ function StudentDashboard() {
           <h2>Welcome, Student!</h2>
           <p className="text-gray-600">Today is {today}</p>
           <ExperienceBar />
+
+
         </>
       );
     }

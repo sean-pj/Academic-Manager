@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import api from "../services/api.js";
+import get from "../services/api.js";
 
 function CourseItem() {
   const [courses, setCourses] = useState([]);
@@ -7,12 +7,8 @@ function CourseItem() {
   // Api call
   useEffect(() => {
     const getData = async () => {
-      try {
-        const result = await api.get("/courses/");
-        setCourses(result.data);
-      } catch (error) {
-        console.log("api error");
-      }
+      const result = await get("/courses/");
+      setCourses(result);
     };
     getData();
   }, []);
