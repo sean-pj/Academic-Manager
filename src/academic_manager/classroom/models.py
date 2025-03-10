@@ -15,4 +15,8 @@ class Classroom(models.Model):
     schedule = models.CharField(max_length=255) # Stores the schedule (ex. weekdays 11-12) - subject to change
 
     def __str__(self):
+<<<<<<< Updated upstream
         return self.name
+=======
+        return self.name
+>>>>>>> Stashed changes

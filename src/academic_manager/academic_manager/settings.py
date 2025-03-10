@@ -45,7 +45,13 @@ INSTALLED_APPS = [
     'students',
     'courses',
     'classroom',
+<<<<<<< Updated upstream
     'assignment'
+=======
+    'assignment',
+    'grades',
+    'submission'
+>>>>>>> Stashed changes
 ]
 
 REST_FRAMEWORK = {
@@ -76,7 +82,13 @@ TEMPLATES = [
             os.path.join(BASE_DIR, "students/templates"),
             os.path.join(BASE_DIR, "courses/templates"),
             os.path.join(BASE_DIR, "classroom/templates"),
+<<<<<<< Updated upstream
             os.path.join(BASE_DIR, "assignment/templates")
+=======
+            os.path.join(BASE_DIR, "assignment/templates"),
+            os.path.join(BASE_DIR, "grades/templates"),
+            os.path.join(BASE_DIR, "submission/templates")
+>>>>>>> Stashed changes
         ],
         'APP_DIRS': True,
         'OPTIONS': {

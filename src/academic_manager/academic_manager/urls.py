@@ -35,7 +35,14 @@ urlpatterns = [
     path('teachers/', include("teachers.urls")),
     path('students/', include("students.urls")),
     path('courses/', include("courses.urls")),
+<<<<<<< Updated upstream
     path("classroom/", include("classroom.urls")),
     path("assignment/", include("assignment.urls")),
+=======
+    path('classroom/', include("classroom.urls")),
+    path('assignment/', include("assignment.urls")),
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+>>>>>>> Stashed changes
     path('api/', include(router.urls))
 ]
