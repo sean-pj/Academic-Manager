@@ -1,12 +1,23 @@
-// src/pages/App.jsx
 import React from 'react';
 import Header from '../homepage-components/Header';
 import Buttons from '../homepage-components/Buttons'; 
 import HeaderButtons from '../homepage-components/HeaderButtons';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
+  const navigate = useNavigate();
+
+  // Handle navigation to the student or teacher dashboard (for testing purposes)
+  const handleStudentNavigation = () => {
+    navigate('/student');
+  };
+
+  const handleTeacherNavigation = () => {
+    navigate('/teacher');
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 relative">
       {/* Header Buttons in top-right */}
       <div className="absolute top-0 right-0 p-4 flex gap-6">
         <HeaderButtons />
@@ -35,11 +46,28 @@ function App() {
         {/* Buttons Component */}
         <Buttons />
       </div>
+
+      {/* Hidden buttons for direct dashboard navigation: change 'none' to 'flex' to make buttons appear */}
+      <button
+        style={{ display: 'none' }}
+        onClick={handleStudentNavigation}
+        id="hidden-student-button"
+      >
+        Go to Student Dashboard
+      </button>
+      <button
+        style={{ display: 'none' }}
+        onClick={handleTeacherNavigation}
+        id="hidden-teacher-button"
+      >
+        Go to Teacher Dashboard
+      </button>
     </div>
   );
 }
 
 export default App;
+
 
 
 
