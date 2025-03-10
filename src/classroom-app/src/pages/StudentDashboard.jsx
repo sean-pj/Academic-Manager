@@ -94,6 +94,7 @@ function StudentDashboard() {
             onClick={() => setSelectedSection("dashboard")}
             other={"bg-green-400 text-black"}
             text="HOME"
+            isActive={selectedSection === "dashboard"}
           />
 
           <NavigationButton
@@ -103,7 +104,8 @@ function StudentDashboard() {
               fetchData("courses");
             }}
             other={"bg-blue-400 text-black"}
-            text="COURSES"
+            text="CLASSES"
+            isActive={selectedSection === "courses"}
           />
 
           <NavigationButton
@@ -114,6 +116,7 @@ function StudentDashboard() {
             }}
             other={"bg-red-400 text-black"}
             text="GRADES"
+            isActive={selectedSection === "grades"}
           />
 
           <NavigationButton
@@ -124,6 +127,7 @@ function StudentDashboard() {
             }}
             other={"bg-orange-300 text-black"}
             text="HOMEWORK"
+            isActive={selectedSection === "assignments"}
           />
         </nav>
       </div>
