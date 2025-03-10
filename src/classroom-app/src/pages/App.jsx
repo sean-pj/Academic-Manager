@@ -46,22 +46,6 @@ function App() {
         {/* Buttons Component */}
         <Buttons />
       </div>
-
-      {/* Hidden buttons for direct dashboard navigation: change 'none' to 'flex' to make buttons appear */}
-      <button
-        style={{ display: 'none' }}
-        onClick={handleStudentNavigation}
-        id="hidden-student-button"
-      >
-        Go to Student Dashboard
-      </button>
-      <button
-        style={{ display: 'none' }}
-        onClick={handleTeacherNavigation}
-        id="hidden-teacher-button"
-      >
-        Go to Teacher Dashboard
-      </button>
     </div>
   );
 }
