@@ -55,7 +55,7 @@ function HeaderButtons() {
           </button>
           <button
             className="w-full py-3 bg-black text-white rounded-full hover:bg-green-600 transition"
-            onClick={() => handleClick("/teacher")}
+            onClick={() => handleClick("/teacher-signup")}
           >
             Teacher
           </button>
@@ -66,7 +66,7 @@ function HeaderButtons() {
 }
 
 export default HeaderButtons;
-ns;
+
 
 
 
