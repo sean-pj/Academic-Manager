@@ -19,7 +19,7 @@ function Buttons() {
       </button>
       <button
         className="px-20 py-3 bg-black text-white rounded-full hover:bg-green-600 transition"
-        onClick={() => handleClick("/teacher")}
+        onClick={() => handleClick("/teacher-signup")}
       >
         Teacher
       </button>
