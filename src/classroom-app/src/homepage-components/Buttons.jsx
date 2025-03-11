@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function ButtonGroup() {
+function Buttons() {
   const navigate = useNavigate();
 
   const handleClick = (path) => {
@@ -13,13 +13,13 @@ function ButtonGroup() {
     <div className="flex gap-4 mt-4">
       <button
         className="px-20 py-3 bg-black text-white rounded-full hover:bg-green-600 transition"
-        onClick={() => handleClick("/student")}
+        onClick={() => handleClick("/student-signup")}
       >
         Student 
       </button>
       <button
         className="px-20 py-3 bg-black text-white rounded-full hover:bg-green-600 transition"
-        onClick={() => handleClick("/teacher")}
+        onClick={() => handleClick("/teacher-signup")}
       >
         Teacher
       </button>
@@ -27,4 +27,4 @@ function ButtonGroup() {
   );
 }
 
-export default ButtonGroup;
+export default Buttons;

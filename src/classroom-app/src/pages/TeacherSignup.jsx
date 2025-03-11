@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from "../services/api.js";
 
-function Signup() {
+function TeacherSignup() {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -14,28 +14,24 @@ function Signup() {
     e.preventDefault();
 
     try {
-
       const response = await api.post("/users/", {
         username: username,
         password: password,
         email: email,
         first_name: firstname,
         last_name: lastname,
-      })
-      console.log(response)
-
-
-      navigate("/login")
-      
+      });
+      console.log(response);
+      navigate("/login");
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-80">
-        <h2 className="text-center text-2xl font-bold mb-6">Signup</h2>
+      <div className="bg-white p-8 rounded-xl shadow-lg w-96">
+        <h2 className="text-center text-2xl font-bold mb-6">Teacher Signup</h2>
         <form onSubmit={handleSignup}>
           <div className="mb-4">
             <label htmlFor="username" className="block text-gray-700">Username</label>
@@ -74,7 +70,7 @@ function Signup() {
             <label htmlFor="firstname" className="block text-gray-700">First Name</label>
             <input
               type="text"
-              id="firstnmame"
+              id="firstname"
               className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               value={firstname}
               onChange={(e) => setFirstName(e.target.value)}
@@ -106,7 +102,7 @@ function Signup() {
             className="text-green-600 hover:text-green-700 block"
             onClick={() => navigate("/login")}
           >
-            Click here to sign in. 
+            Click here to sign in.
           </a>
         </div>
       </div>
@@ -114,4 +110,5 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default TeacherSignup;
+

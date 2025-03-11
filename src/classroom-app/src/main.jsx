@@ -7,7 +7,8 @@ import App from "./pages/App.jsx";
 import StudentDashboard from "./pages/StudentDashboard.jsx";
 import TeacherDashboard from "./pages/TeacherDashboard.jsx";
 import Login from './pages/Login';
-import Signup from "./pages/Signup.jsx";
+import StudentSignup from "./pages/StudentSignup.jsx";
+import TeacherSignup from "./pages/TeacherSignup.jsx";
 
 const router = createBrowserRouter([
   {
@@ -27,8 +28,12 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/signup",
-    element: <Signup></Signup>
+    path: "/student-signup",
+    element: <StudentSignup></StudentSignup>
+  },
+  {
+    path: "/teacher-signup",
+    element: <TeacherSignup></TeacherSignup>
   },
 ]);
 
