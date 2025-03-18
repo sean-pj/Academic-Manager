@@ -40,7 +40,7 @@ function StudentSignup() {
   const grades = Array.from({ length: 8 }, (_, i) => i + 1);
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 overflow-y-auto">
       <div className="bg-white p-8 rounded-xl shadow-lg w-96">
         <h2 className="text-center text-2xl font-bold mb-6">Student Signup</h2>
         <form onSubmit={handleSignup}>
