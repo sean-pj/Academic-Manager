@@ -48,6 +48,28 @@ const refreshAuthToken = async () => {
   }
 };
 
+export const login = async (user, password) => {
+  try {
+    const response = await api.post("/token/", {
+      username: user,
+      password: password,
+    });
+    
+    localStorage.setItem("token", response.data.access);
+    localStorage.setItem("refresh_token", response.data.refresh);
+    
+  } catch (err) {
+    console.log("invalid credentials", err)
+  }
+}
+
+export const logout = () => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('refresh_token');
+
+  console.log("logout successfull")
+}
+
 export const get = async (endpoint) => {
   try {
     if (USE_STUB_DATA) {
@@ -75,13 +97,13 @@ export const get = async (endpoint) => {
       console.log('Access token expired. Refreshing token');
       
       const newToken = await refreshAuthToken();
-      api.defaults.headers['Authorization'] = `Bearer ${newToken}`;
+        api.defaults.headers['Authorization'] = `Bearer ${newToken}`;
 
-      const response = await api.get(endpoint);
-      return await response.data;
+        const response = await api.get(endpoint);
+        return await response.data;
     }
 
-    console.error('API call failed', error);
+    console.error('API call failed');
     throw error;
   }
 };

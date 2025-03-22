@@ -25,7 +25,8 @@ function StudentSignup() {
         first_name: firstname,
         last_name: lastname,
         birthday: `${birthdayYear}-${birthdayMonth}-${birthdayDay}`,
-        grade: grade
+        grade: grade,
+        role: 'student'
       })
       console.log(response)
       navigate("/login")

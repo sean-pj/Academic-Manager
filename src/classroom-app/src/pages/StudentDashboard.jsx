@@ -7,6 +7,7 @@ import GradeItem from "../components/GradeItem.jsx";
 import UserProfile from "../components/StudentHome.jsx";
 import StarsCounter from "../components/StarsCounter.jsx";
 import Header from "../homepage-components/Header.jsx";
+import { logout } from "../services/api.js";
 
 function StudentDashboard() {
   const [selectedSection, setSelectedSection] = useState("dashboard");
@@ -152,7 +153,7 @@ function StudentDashboard() {
             <NavigationButton
                 imgSrc="\src\assets\log-out.svg"
                 onClick={() => {
-                  
+                  logout();
                 }}
                 other={"bg-yellow-400 text-black"}
                 text="LOGOUT"
