@@ -1,21 +1,36 @@
-import React, { useState } from 'react';
-import api, { login } from "../services/api.js"
+import React, { useEffect, useState } from 'react';
+import api, { login, get } from "../services/api.js"
 import { useNavigate } from 'react-router-dom';
 
 
 function Login() {
   const navigate = useNavigate();
-  const [user, setUsernameOrEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [user, setUser] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    login(user, password);
+    await login(username, password);
 
-    navigate("/student")
-    
+    const getData = async () => {
+      const result = await get("/users/");
+      setUser(result[0]);
+    };
+    getData()
+
   };
+
+  useEffect(() => {
+    if (user) {
+      if (user.student != null) {
+        navigate("/student");
+      } else if (user.teacher != null) {
+        navigate("/teacher");
+      }
+    }
+  }, [user])
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
@@ -23,13 +38,13 @@ function Login() {
         <h2 className="text-center text-2xl font-bold mb-6">Login</h2>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
-            <label htmlFor="usernameOrEmail" className="block text-gray-700">Username</label>
+            <label htmlFor="username" className="block text-gray-700">Username</label>
             <input
               type="text"
-              id="usernameOrEmail"
+              id="username"
               className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              value={user}
-              onChange={(e) => setUsernameOrEmail(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
             />
           </div>
