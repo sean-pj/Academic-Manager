@@ -6,9 +6,8 @@ class Submissions(models.Model):
     # Store the variables for this class
     # - Comments, pdf file, mark (2 decimal place), 
     # - grades (delete if the pointer submission is removed), submittion time (automatically based on current time)
-    comments = models.CharField(max_length=255) # Comments
+    comments = models.CharField(max_length=255) 
     file = models.FileField(upload_to='submissions/pdf/', blank=False, null=False)
-    mark = models.DecimalField(max_digits=5, decimal_places=2) 
     grades = models.ForeignKey(Grades, on_delete=models.CASCADE)
     submitted_time = models.DateTimeField(auto_now_add=True)
 

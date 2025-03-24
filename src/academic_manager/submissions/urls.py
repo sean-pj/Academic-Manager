@@ -1,13 +1,10 @@
-# Using the (viewsets + DefaultRouter) for file handling [differs from traditional path for HTML pages]
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import SubmissionViewSet
-
-# Create a router and register viewset
-# --DefaultRouter provides a router to handle URL routing 
-router = DefaultRouter()
-router.register(r'submissions', SubmissionViewSet)  # Register the SubmissionViewSet with the router
+from django.urls import path
+from .views import SubmissionView, CreateSubmissionView, UpdateSubmissionView, DeleteSubmissionView
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('submissions', SubmissionView.as_view()),  # View all submissions
+    path('create-submission', CreateSubmissionView.as_view()),  # Create a submission
+    path('update-submission/<int:pk>/', UpdateSubmissionView.as_view()),  # Update a submission
+    path('delete-submission/<int:pk>/', DeleteSubmissionView.as_view()),  # Delete a submission
 ]
+
