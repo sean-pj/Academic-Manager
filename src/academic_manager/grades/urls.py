@@ -1,6 +1,10 @@
 from django.urls import path
-from . import views
+from .views import GradesView, CreateGradesView, UpdateGradesView, DeleteGradesView
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path('submissions', GradesView.as_view()),  # View all submissions
+    path('create-submission', CreateGradesView.as_view()),  # Create a submission
+    path('update-submission/<int:pk>/', UpdateGradesView.as_view()),  # Update a submission
+    path('delete-submission/<int:pk>/', DeleteGradesView.as_view()),  # Delete a submission
 ]
+
