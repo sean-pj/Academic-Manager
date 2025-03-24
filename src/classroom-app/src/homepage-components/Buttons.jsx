@@ -21,7 +21,7 @@ function Buttons() {
       <button
         className="px-20 py-3 bg-black text-white rounded-full hover:bg-green-600 transition"
         onClick={() => {
-          if (user.student != null) {
+          if (user?.student != null) {
             navigate("/student");
           } else {
             navigate("/student-signup")
@@ -33,7 +33,7 @@ function Buttons() {
       <button
         className="px-20 py-3 bg-black text-white rounded-full hover:bg-green-600 transition"
         onClick={() => {
-          if (user.teacher != null) {
+          if (user?.teacher != null) {
             navigate("/teacher");
           } else {
             navigate("/teacher-signup")

@@ -17,20 +17,17 @@ function Login() {
     const getData = async () => {
       const result = await get("/users/");
       setUser(result[0]);
+      const userData = result[0];
+
+      if (userData?.student != null) {
+        navigate("/student");
+      } else if (userData?.teacher != null) {
+        navigate("/teacher");
+      }
     };
     getData()
 
   };
-
-  useEffect(() => {
-    if (user) {
-      if (user.student != null) {
-        navigate("/student");
-      } else if (user.teacher != null) {
-        navigate("/teacher");
-      }
-    }
-  }, [user])
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">

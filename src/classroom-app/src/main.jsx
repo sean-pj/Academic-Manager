@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
@@ -9,6 +9,8 @@ import TeacherDashboard from "./pages/TeacherDashboard.jsx";
 import Login from './pages/Login';
 import StudentSignup from "./pages/StudentSignup.jsx";
 import TeacherSignup from "./pages/TeacherSignup.jsx";
+import StudentRoute from "./protected-routes/StudentRoute.jsx";
+import TeacherRoute from "./protected-routes/TeacherRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -17,11 +19,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/student",
-    element: <StudentDashboard></StudentDashboard>,
+    element: <StudentRoute><StudentDashboard></StudentDashboard></StudentRoute>,
   },
   {
     path: "/teacher",
-    element: <TeacherDashboard></TeacherDashboard>,
+    element: <TeacherRoute><TeacherDashboard></TeacherDashboard></TeacherRoute>,
   },
   {
     path: "/login",  

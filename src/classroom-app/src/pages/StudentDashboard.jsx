@@ -7,13 +7,16 @@ import GradeItem from "../components/GradeItem.jsx";
 import UserProfile from "../components/StudentHome.jsx";
 import StarsCounter from "../components/StarsCounter.jsx";
 import Header from "../homepage-components/Header.jsx";
-import { logout } from "../services/api.js";
+import { get, logout } from "../services/api.js";
+import { useNavigate } from "react-router-dom";
 
 function StudentDashboard() {
   const [selectedSection, setSelectedSection] = useState("dashboard");
   const [grades, setGrades] = useState([]);
   const [assignments, setAssignments] = useState([]);
-  const [courses, setCourses] = useState([]);
+
+  const navigate = useNavigate();
+
 
   // Fetch data for the selected section
   const fetchData = (section) => {
@@ -101,6 +104,7 @@ function StudentDashboard() {
       <div>
         {/* <h1>Student Dashboard</h1> */}
         <nav className="w-full relative p-4 border-b-2 border-gray-200">
+          {/* Greenbar title */}
           <span className="absolute"> 
             <Header />
           </span>
@@ -149,11 +153,13 @@ function StudentDashboard() {
             {/* Star counter */}
             <StarsCounter stars={4} />
           </span>
+          {/* Logout */}
           <span className="top-4 right-4 absolute flex justify-end"> 
             <NavigationButton
                 imgSrc="\src\assets\log-out.svg"
                 onClick={() => {
                   logout();
+                  navigate("/");
                 }}
                 other={"bg-yellow-400 text-black"}
                 text="LOGOUT"
