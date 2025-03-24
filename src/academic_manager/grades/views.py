@@ -19,9 +19,9 @@ class CreateGradesView(APIView):
         if serializer.is_valid():
             comments = serializer.validated_data.get('comments')
             grades = serializer.validated_data.get('grades')
-            grades = Grades(comments=comments, grades=grades)
-            grades.save()
-            return Response(GradesSerializer(grades).data, status=status.HTTP_201_CREATED)
+            grade = Grades(comments=comments, grades=grades)
+            grade.save()
+            return Response(GradesSerializer(grade).data, status=status.HTTP_201_CREATED)
 
         return Response({'error': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -30,16 +30,16 @@ class UpdateGradesView(APIView):
     serializer_class = CreateGradesSerializer
 
     def put(self, request, pk, format=None):
-        submission = get_object_or_404(Grades, pk=pk)
-        serializer = self.serializer_class(submission, data=request.data, partial=True)
+        grade = get_object_or_404(Grades, pk=pk)
+        serializer = self.serializer_class(grade, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response(GradesSerializer(submission).data, status=status.HTTP_200_OK)
+            return Response(GradesSerializer(grade).data, status=status.HTTP_200_OK)
         return Response({'error': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 # Delete Submission (REMOVE) 
 class DeleteGradesView(APIView):
     def delete(self, request, pk, format=None):
-        submission = get_object_or_404(Grades, pk=pk)
-        submission.delete()
-        return Response({'message': 'Submission deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+        grade = get_object_or_404(Grades, pk=pk)
+        grade.delete()
+        return Response({'message': 'Grade deleted successfully'}, status=status.HTTP_204_NO_CONTENT)

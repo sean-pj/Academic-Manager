@@ -7,7 +7,7 @@ class Assignments(models.Model):
     title = models.CharField(max_length=255) # Name of Assignment
     description = models.TextField(null=True, blank=True) # Description of Assignment
     due_date = models.DateTimeField(null=True, blank=True) # Store the due date
-    submissions = models.ManyToManyField(Submissions, related_name="assignments") # Store the submissions, delete submissions once model is deleted
+    submissions = models.ManyToManyField(Submissions, related_name="assignments", blank=True) # Store the submissions, delete submissions once model is deleted
 
     def __str__(self):
         return self.title
