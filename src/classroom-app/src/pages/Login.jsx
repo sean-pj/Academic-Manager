@@ -1,30 +1,32 @@
-import React, { useState } from 'react';
-import api from "../services/api.js"
+import React, { useEffect, useState } from 'react';
+import api, { login, get } from "../services/api.js"
 import { useNavigate } from 'react-router-dom';
 
 
 function Login() {
   const navigate = useNavigate();
-  const [usernameOrEmail, setUsernameOrEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [user, setUser] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await api.post("/token/", {
-        username: usernameOrEmail,
-        password: password,
-      });
-      
-      localStorage.setItem("token", response.data.access);
-      localStorage.setItem("refresh_token", response.data.refresh);
+    await login(username, password);
 
-      navigate("/student")
-      
-    } catch (err) {
-      console.log("invalid credentials")
-    }
+    const getData = async () => {
+      const result = await get("/users/");
+      setUser(result[0]);
+      const userData = result[0];
+
+      if (userData?.student != null) {
+        navigate("/student");
+      } else if (userData?.teacher != null) {
+        navigate("/teacher");
+      }
+    };
+    getData()
+
   };
 
   return (
@@ -33,13 +35,13 @@ function Login() {
         <h2 className="text-center text-2xl font-bold mb-6">Login</h2>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
-            <label htmlFor="usernameOrEmail" className="block text-gray-700">Username or Email</label>
+            <label htmlFor="username" className="block text-gray-700">Username</label>
             <input
               type="text"
-              id="usernameOrEmail"
+              id="username"
               className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              value={usernameOrEmail}
-              onChange={(e) => setUsernameOrEmail(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
             />
           </div>
@@ -62,13 +64,22 @@ function Login() {
           </button>
         </form>
         <div className="mt-4 text-center">
-          <span className="text-gray-700">Don't have an account? </span>
+          <span className="text-gray-700">Don't have an account? Register as a </span>
+          <br></br>
           <a
             href="#"
             className="text-green-600 hover:text-green-700"
-            onClick={() => navigate('/signup')}
+            onClick={() => navigate('/student-signup')}
           >
-            Register
+            Student
+          </a>
+          <span> or </span> 
+          <a
+            href="#"
+            className="text-green-600 hover:text-green-700"
+            onClick={() => navigate('/teacher-signup')}
+          >
+            Teacher
           </a>
         </div>
       </div>

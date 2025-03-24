@@ -27,7 +27,7 @@ function App() {
       <nav className="w-full p-9 flex justify-center gap-5 border-b-2 border-gray-200"></nav>
 
       {/* Header Section */}
-      <div className="absolute top-0 left-0 p-4">
+      <div className="absolute ml-50 top-0 left-0 p-4">
         <Header />
       </div>
 

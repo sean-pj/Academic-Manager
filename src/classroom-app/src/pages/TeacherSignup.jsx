@@ -20,6 +20,7 @@ function TeacherSignup() {
         email: email,
         first_name: firstname,
         last_name: lastname,
+        role: 'teacher'
       });
       console.log(response);
       navigate("/login");

@@ -6,12 +6,17 @@ import HomeworkItem from "../components/HomeworkItem.jsx";
 import GradeItem from "../components/GradeItem.jsx";
 import UserProfile from "../components/StudentHome.jsx";
 import StarsCounter from "../components/StarsCounter.jsx";
+import Header from "../homepage-components/Header.jsx";
+import { get, logout } from "../services/api.js";
+import { useNavigate } from "react-router-dom";
 
 function StudentDashboard() {
   const [selectedSection, setSelectedSection] = useState("dashboard");
   const [grades, setGrades] = useState([]);
   const [assignments, setAssignments] = useState([]);
-  const [courses, setCourses] = useState([]);
+
+  const navigate = useNavigate();
+
 
   // Fetch data for the selected section
   const fetchData = (section) => {
@@ -98,50 +103,69 @@ function StudentDashboard() {
     <div>
       <div>
         {/* <h1>Student Dashboard</h1> */}
-        <nav className="w-full p-4 flex justify-center gap-5 border-b-2 border-gray-200">
-          <NavigationButton
-            imgSrc="\src\assets\school.svg"
-            onClick={() => setSelectedSection("dashboard")}
-            other={"bg-green-400 text-black"}
-            text="HOME"
-            isActive={selectedSection === "dashboard"}
-          />
+        <nav className="w-full relative p-4 border-b-2 border-gray-200">
+          {/* Greenbar title */}
+          <span className="absolute"> 
+            <Header />
+          </span>
+          <span className="w-full flex justify-center gap-5"> 
+            <NavigationButton
+              imgSrc="\src\assets\school.svg"
+              onClick={() => setSelectedSection("dashboard")}
+              other={"bg-green-400 text-black"}
+              text="HOME"
+              isActive={selectedSection === "dashboard"}
+            />
 
-          <NavigationButton
-            imgSrc="\src\assets\folder-open.svg"
-            onClick={() => {
-              setSelectedSection("courses");
-              fetchData("courses");
-            }}
-            other={"bg-blue-400 text-black"}
-            text="CLASSES"
-            isActive={selectedSection === "courses"}
-          />
+            <NavigationButton
+              imgSrc="\src\assets\folder-open.svg"
+              onClick={() => {
+                setSelectedSection("courses");
+                fetchData("courses");
+              }}
+              other={"bg-blue-400 text-black"}
+              text="CLASSES"
+              isActive={selectedSection === "courses"}
+            />
 
-          <NavigationButton
-            imgSrc="\src\assets\book-check.svg"
-            onClick={() => {
-              setSelectedSection("grades");
-              fetchData("grades");
-            }}
-            other={"bg-red-400 text-black"}
-            text="GRADES"
-            isActive={selectedSection === "grades"}
-          />
+            <NavigationButton
+              imgSrc="\src\assets\book-check.svg"
+              onClick={() => {
+                setSelectedSection("grades");
+                fetchData("grades");
+              }}
+              other={"bg-red-400 text-black"}
+              text="GRADES"
+              isActive={selectedSection === "grades"}
+            />
 
-          <NavigationButton
-            imgSrc="\src\assets\notebook-pen.svg"
-            onClick={() => {
-              setSelectedSection("assignments");
-              fetchData("assignments");
-            }}
-            other={"bg-orange-300 text-black"}
-            text="HOMEWORK"
-            isActive={selectedSection === "assignments"}
-          />
+            <NavigationButton
+              imgSrc="\src\assets\notebook-pen.svg"
+              onClick={() => {
+                setSelectedSection("assignments");
+                fetchData("assignments");
+              }}
+              other={"bg-orange-300 text-black"}
+              text="HOMEWORK"
+              isActive={selectedSection === "assignments"}
+            />
 
-          {/* Star counter */}
-          <StarsCounter stars={4} />
+            {/* Star counter */}
+            <StarsCounter stars={4} />
+          </span>
+          {/* Logout */}
+          <span className="top-4 right-4 absolute flex justify-end"> 
+            <NavigationButton
+                imgSrc="\src\assets\log-out.svg"
+                onClick={() => {
+                  logout();
+                  navigate("/");
+                }}
+                other={"bg-yellow-400 text-black"}
+                text="LOGOUT"
+              />
+          </span>
+
         </nav>
       </div>
 

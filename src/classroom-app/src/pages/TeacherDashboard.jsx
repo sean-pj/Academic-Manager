@@ -4,12 +4,16 @@ import NavigationButton from "../components/NavigationButton.jsx";
 import HomeworkItem from "../components/HomeworkItem.jsx";
 import GradeItem from "../components/GradeItem.jsx";
 import CourseItem from "../components/CourseItem.jsx";
+import Header from "../homepage-components/Header.jsx";
+import { useNavigate } from "react-router-dom";
 
 function TeacherDashboard() {
   const [selectedSection, setSelectedSection] = useState("dashboard");
   const [grades, setGrades] = useState([]);
   const [assignments, setAssignments] = useState([]);
   const [analytics, setAnalytics] = useState([]);
+
+  const navigate = useNavigate();
 
   // Get the date
   const today = new Date().toLocaleDateString("en-US", {
@@ -115,51 +119,70 @@ function TeacherDashboard() {
   return (
     <div>
       <div>
-        <nav className="w-full p-4 flex justify-center gap-5 border-b-2 border-gray-200">
-          <NavigationButton
-            imgSrc="\src\assets\school.svg"
-            onClick={() => setSelectedSection("dashboard")}
-            other={"bg-green-400 text-black"}
-            text="HOME"
-          />
+        <nav className="w-full relative p-4 border-b-2 border-gray-200">
+          {/* Greenbar title */}
+          <span className="absolute"> 
+            <Header />
+          </span>
+          <span className="w-full flex justify-center gap-5"> 
+            <NavigationButton
+              imgSrc="\src\assets\school.svg"
+              onClick={() => setSelectedSection("dashboard")}
+              other={"bg-green-400 text-black"}
+              text="HOME"
+            />
 
-          <NavigationButton
-            imgSrc="\src\assets\folder-open.svg"
-            onClick={() => {
-              setSelectedSection("courses");
-              fetchData("courses");
-            }}
-            other={"bg-blue-400 text-black"}
-            text="COURSES"
-          />
+            <NavigationButton
+              imgSrc="\src\assets\folder-open.svg"
+              onClick={() => {
+                setSelectedSection("courses");
+                fetchData("courses");
+              }}
+              other={"bg-blue-400 text-black"}
+              text="COURSES"
+            />
 
-          <NavigationButton
-            imgSrc="\src\assets\book-check.svg"
-            onClick={() => {
-              setSelectedSection("grades");
-              fetchData("grades");
-            }}
-            other={"bg-red-400 text-black"}
-            text="ASSIGNMENTS"
-          />
+            <NavigationButton
+              imgSrc="\src\assets\book-check.svg"
+              onClick={() => {
+                setSelectedSection("grades");
+                fetchData("grades");
+              }}
+              other={"bg-red-400 text-black"}
+              text="ASSIGNMENTS"
+            />
 
-          <NavigationButton
-            imgSrc="\src\assets\notebook-pen.svg"
-            onClick={() => {
-              setSelectedSection("analytics");
-              fetchData("analytics");
-            }}
-            other={"bg-orange-300 text-black"}
-            text="ANALYTICS"
-          />
-           <NavigationButton
-            imgSrc="\src\assets\manage.svg"
-            onClick={() => {
-              setSelectedSection("manage");
-            }}
-            other={"bg-purple-300 text-black"}
-            text="MANAGE"
-          />
+            <NavigationButton
+              imgSrc="\src\assets\notebook-pen.svg"
+              onClick={() => {
+                setSelectedSection("analytics");
+                fetchData("analytics");
+              }}
+              other={"bg-orange-300 text-black"}
+              text="ANALYTICS"
+            />
+            <NavigationButton
+              imgSrc="\src\assets\manage.svg"
+              onClick={() => {
+                setSelectedSection("manage");
+              }}
+              other={"bg-purple-300 text-black"}
+              text="MANAGE"
+            />
+          </span>
+
+          {/* Logout */}
+          <span className="top-4 right-4 absolute flex justify-end"> 
+            <NavigationButton
+                imgSrc="\src\assets\log-out.svg"
+                onClick={() => {
+                  logout();
+                  navigate("/");
+                }}
+                other={"bg-yellow-400 text-black"}
+                text="LOGOUT"
+              />
+          </span>
         </nav>
       </div>
       <main className="p-8">{renderSectionContent()}</main>
