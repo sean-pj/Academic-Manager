@@ -1,6 +1,6 @@
 from django.db import models
-from students.models import *
-from teachers.models import *
+from students.models import Student
+from teachers.models import Teacher
 
 # Create your models here.
 class Course(models.Model):
@@ -10,3 +10,4 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+    

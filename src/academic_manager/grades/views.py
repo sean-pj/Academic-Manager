@@ -18,8 +18,9 @@ class CreateGradesView(APIView):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             comments = serializer.validated_data.get('comments')
-            grades = serializer.validated_data.get('grades')
-            grade = Grades(comments=comments, grades=grades)
+            mark = serializer.validated_data.get('mark')
+            submission = serializer.validated_data.get('submission')
+            grade = Grades(comments=comments, mark=mark, submission=submission)
             grade.save()
             return Response(GradesSerializer(grade).data, status=status.HTTP_201_CREATED)
 

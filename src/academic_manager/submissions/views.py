@@ -19,8 +19,9 @@ class CreateSubmissionView(APIView):
         if serializer.is_valid():
             comments = serializer.validated_data.get('comments')
             file = serializer.validated_data.get('file')
-            grades = serializer.validated_data.get('grades')
-            submission = Submissions(comments=comments, file=file, grades=grades)
+            assignment = serializer.validated_data.get('assignment')
+            student = serializer.validated_data.get('student')
+            submission = Submissions(comments=comments, file=file, assignment=assignment, student=student)
             submission.save()
             return Response(SubmissionSerializer(submission).data, status=status.HTTP_201_CREATED)
 

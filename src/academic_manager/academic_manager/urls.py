@@ -40,7 +40,7 @@ urlpatterns = [
     path('students/', include("students.urls")),
     path('courses/', include("courses.urls")),
     path('grades/', include("grades.urls")),
-    path('api/', include('submissions.urls')),
+    path('submissions/', include('submissions.urls')),
     path('classroom/', include("classroom.urls")),
     path('assignments/', include("assignments.urls")),
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),

@@ -20,8 +20,9 @@ class CreateAssignmentView(APIView):
             title = serializer.validated_data.get('title')
             description = serializer.validated_data.get('description')
             due_date = serializer.validated_data.get('due_date')
-            submissions = serializer.validated_data.get('submissions')
-            assignment = Assignments(title=title, description=description, due_date=due_date, submissions=submissions)
+            classroom = serializer.validated_data.get('classroom')
+            weight = serializer.validated_data.get('weight')
+            assignment = Assignments(title=title, description=description, due_date=due_date, classroom=classroom, weight=weight)
             assignment.save()
             return Response(AssignmentSerializer(assignment).data, status=status.HTTP_201_CREATED)
 

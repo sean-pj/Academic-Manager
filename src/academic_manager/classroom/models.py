@@ -1,18 +1,20 @@
 from django.db import models
-from teachers.models import *
-from students.models import *
-from assignments.models import *
+from teachers.models import Teacher
+from students.models import Student
+from courses.models import Course
 
 # Create your models here.
 class Classrooms(models.Model):
-    # Store the name of the course's section (Letter)
+    # Store course's section (Letter), course (many-to-one), teacher (many-to-one), students (many-to-many --subject to deletion), schedule
     sectionName = models.CharField(max_length=255)
-
-    # One teacher per classroom, once teacher is removed (students associated with that classroom lose their reference to that classroom)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)  
-    students = models.ManyToManyField(Student)  # Multiple students per classroom (ManyToManyField)
-    assignments = models.ManyToManyField(Assignments)  # Multiple assignments per classroom (ManyToManyField)
-    schedule = models.CharField(max_length=255) # Stores the schedule (ex. weekdays 11-12) - subject to change
+    students = models.ManyToManyField(Student)
+    schedule = models.CharField(max_length=255)
+
+    # Forcibily changes the name in the admin site to Classrooms instead of "ss"
+    class Meta:
+        verbose_name_plural = "Classrooms"  
 
     def __str__(self):
-        return self.sectionName
+        return f"{self.sectionName} - {self.course.name}"

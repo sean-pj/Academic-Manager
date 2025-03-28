@@ -18,13 +18,15 @@ class CreateClassroomView(APIView):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             sectionName = serializer.validated_data.get('sectionName')
+            course = serializer.validated_data.get('course')
             teacher = serializer.validated_data.get('teacher')
             students = serializer.validated_data.get('students')
-            assignments = serializer.validated_data.get('assignments')
             schedule = serializer.validated_data.get('schedule')
             classroom = Classrooms(sectionName=sectionName, 
-                                   teacher=teacher, students=students, 
-                                   assignments=assignments, schedule=schedule)
+                                   course=course,
+                                   teacher=teacher, 
+                                   students=students,
+                                   schedule=schedule)
             classroom.save()
             return Response(ClassroomSerializer(classroom).data, status=status.HTTP_201_CREATED)
 
