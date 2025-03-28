@@ -11,4 +11,6 @@ def index(request):
 class SubmissionView(viewsets.ModelViewSet):
     queryset = Submissions.objects.all()
     serializer_class = SubmissionSerializer
-    permission_classes = [AllowAny]
+    
+    #Uncomment below, if you want access to BACKEND website access
+    #permission_classes = [AllowAny]

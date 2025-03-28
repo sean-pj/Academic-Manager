@@ -11,4 +11,6 @@ def index(request):
 class ClassroomView(viewsets.ModelViewSet):
     queryset = Classrooms.objects.all()
     serializer_class = ClassroomSerializer
-    permission_classes = [AllowAny]
+    
+    #Uncomment below, if you want access to BACKEND website access
+    #permission_classes = [AllowAny]
