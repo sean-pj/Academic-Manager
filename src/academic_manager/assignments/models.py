@@ -1,6 +1,7 @@
 from django.db import models
 from submissions.models import *
 from classroom.models import Classrooms
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 class Assignments(models.Model):
@@ -9,7 +10,7 @@ class Assignments(models.Model):
     description = models.TextField(null=True, blank=True) # Description of Assignment
     due_date = models.DateTimeField(null=True, blank=True) # Store the due date
     classroom = models.ForeignKey(Classrooms, on_delete=models.CASCADE) #Classroom
-    weight = models.DecimalField(max_digits=5, decimal_places=2, default=1.0)  # Weight of the assignment
+    weight = models.DecimalField(max_digits=5, decimal_places=2, default=1.0, validators=[MinValueValidator(0), MaxValueValidator(100)])  # Weight of the assignment
 
     # Forcibily changes the name in the admin site to Assignments instead of "ss"
     class Meta:

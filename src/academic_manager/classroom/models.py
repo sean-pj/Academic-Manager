@@ -17,4 +17,4 @@ class Classrooms(models.Model):
         verbose_name_plural = "Classrooms"  
 
     def __str__(self):
-        return f"{self.sectionName} - {self.course.name}"
+        return f"{self.course.title} - {self.sectionName}"

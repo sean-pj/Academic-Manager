@@ -4,6 +4,7 @@ from grades.models import *
 from students.models import *
 from assignments.models import Assignments
 
+
 # Create your models here.
 class Submissions(models.Model):
     # Store the variables for this class
@@ -20,4 +21,4 @@ class Submissions(models.Model):
         verbose_name_plural = "Submissions" 
 
     def __str__(self):
-        return f"Submission Name: {self.file.name}"
+        return f"Submission:{self.student.user.username} - {self.assignment.title} - {self.file.name}"
