@@ -22,3 +22,4 @@ class Submissions(models.Model):
 
     def __str__(self):
         return f"Submission:{self.student.user.username} - {self.assignment.title} - {self.file.name}"
+    

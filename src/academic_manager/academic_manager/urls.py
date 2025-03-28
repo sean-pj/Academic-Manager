@@ -16,11 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 
 #Rest
 from students.views import StudentViewSet
 from courses.views import CourseViewSet
 from teachers.views import TeacherViewSet
+from assignments.views import AssignmentView
+from classroom.views import ClassroomView
+from grades.views import GradeView
+from submissions.views import SubmissionView
 from core.views import UserViewSet
 from rest_framework.routers import DefaultRouter
 
@@ -29,6 +35,10 @@ router.register(r'students', StudentViewSet)
 router.register(r'teachers', TeacherViewSet)
 router.register(r'courses', CourseViewSet)
 router.register(r'users', UserViewSet)
+router.register(r'assignments', AssignmentView)
+router.register(r'classrooms', ClassroomView)
+router.register(r'grades', GradeView)
+router.register(r'submissions', SubmissionView)
 
 # JWT Authentication
 from rest_framework_simplejwt import views as jwt_views
@@ -46,4 +56,4 @@ urlpatterns = [
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('api/', include(router.urls))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
