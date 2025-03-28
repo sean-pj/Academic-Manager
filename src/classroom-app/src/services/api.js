@@ -60,7 +60,8 @@ export const login = async (user, password) => {
     localStorage.setItem("refresh_token", response.data.refresh);
     
   } catch (err) {
-    console.log("invalid credentials", err)
+    console.log("invalid credentials", err);
+    alert("Invalid username or password. Try again.");
   }
 }
 
