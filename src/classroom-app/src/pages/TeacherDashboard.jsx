@@ -59,7 +59,9 @@ function TeacherDashboard() {
       return (
         <>
           <h2>Your Classes</h2>
-          <CourseItem></CourseItem>
+          <div className="py-4 flex flex-col gap-5">
+            <CourseItem></CourseItem>
+          </div>
         </>
       );
     } else if (selectedSection === "grades") {

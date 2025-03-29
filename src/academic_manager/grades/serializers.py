@@ -5,10 +5,10 @@ class GradesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Grades
-        #fields = ['id', 'comments', 'grades']
+        #fields = ['id', 'comments', 'mark', 'submission']
         fields = '__all__'
 
 class CreateGradesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Grades
-        fields = ['comments', 'grades']
+        fields = ['comments', 'mark', 'submission']

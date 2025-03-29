@@ -25,3 +25,6 @@ db.sqlite3
 
 # Migrations
 **/migrations/*.py
+
+# Don't ignore __init__ files
+!**/migrations/__init__.py

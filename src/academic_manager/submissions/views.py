@@ -1,46 +1,16 @@
-from django.shortcuts import get_object_or_404
-from rest_framework import generics, status
-from .serializers import SubmissionSerializer, CreateSubmissionSerializer
+from .serializers import SubmissionSerializer
 from .models import Submissions
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from django.shortcuts import render
+from rest_framework import viewsets
+from rest_framework.permissions import AllowAny       
 
-# View All Submissions (GET)
-class SubmissionView(generics.ListAPIView):
+# Create your views here.
+def index(request):
+    return render(request, "assignments/index.html")
+
+class SubmissionView(viewsets.ModelViewSet):
     queryset = Submissions.objects.all()
     serializer_class = SubmissionSerializer
-
-# Create Submission (POST) 
-class CreateSubmissionView(APIView):
-    serializer_class = CreateSubmissionSerializer
-
-    def post(self, request, format=None):
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            comments = serializer.validated_data.get('comments')
-            file = serializer.validated_data.get('file')
-            grades = serializer.validated_data.get('grades')
-            submission = Submissions(comments=comments, file=file, grades=grades)
-            submission.save()
-            return Response(SubmissionSerializer(submission).data, status=status.HTTP_201_CREATED)
-
-        return Response({'error': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
-
-# Update Submission (MODIFY) 
-class UpdateSubmissionView(APIView):
-    serializer_class = CreateSubmissionSerializer
-
-    def put(self, request, pk, format=None):
-        submission = get_object_or_404(Submissions, pk=pk)
-        serializer = self.serializer_class(submission, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(SubmissionSerializer(submission).data, status=status.HTTP_200_OK)
-        return Response({'error': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
-
-# Delete Submission (REMOVE) 
-class DeleteSubmissionView(APIView):
-    def delete(self, request, pk, format=None):
-        submission = get_object_or_404(Submissions, pk=pk)
-        submission.delete()
-        return Response({'message': 'Submission deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+    
+    #Uncomment below, if you want access to BACKEND website access
+    #permission_classes = [AllowAny]
