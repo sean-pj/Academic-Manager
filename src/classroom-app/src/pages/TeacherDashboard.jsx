@@ -16,6 +16,9 @@ function TeacherDashboard() {
 
   // Form states for new student data
   const [studentUsername, setStudentUsername] = useState("");
+  const [stars, setStars] = useState({}); // Store stars for each student by ID
+  const [editingStarsFor, setEditingStarsFor] = useState(null); // Track which student stars are being edited
+  const [starInput, setStarInput] = useState(""); // Track input for new star count
 
   const navigate = useNavigate();
 
@@ -42,11 +45,17 @@ function TeacherDashboard() {
       setGrades(simulatedGrades); // Setting simulated grades for now
     } else if (section === "analytics") {
       const simulatedAnalytics = [
-        { id: 1, name: "Emma Johnson", currentGrade: 92, level: 5, xp: 1500, badges: ["Math Whiz"] },
-        { id: 2, name: "Liam Smith", currentGrade: 88, level: 4, xp: 1200, badges: ["Science Explorer"] },
+        { id: 1, name: "Emma Johnson", currentGrade: 92, level: 5, xp: 1500, badges: ["Math Whiz"], stars: 0 },
+        { id: 2, name: "Liam Smith", currentGrade: 88, level: 4, xp: 1200, badges: ["Science Explorer"], stars: 0 },
         // Additional students here...
       ];
       setAnalytics(simulatedAnalytics);
+      // Initialize stars for each student
+      const starsData = simulatedAnalytics.reduce((acc, student) => {
+        acc[student.id] = student.stars || 0;
+        return acc;
+      }, {});
+      setStars(starsData);
     }
   };
 
@@ -68,8 +77,6 @@ function TeacherDashboard() {
         grade.id === studentId ? { ...grade, grade: updatedGrade } : grade
       )
     );
-
-    // Simulated API call to update the grade in the backend
     alert("Grade updated successfully!");
   };
 
@@ -78,6 +85,24 @@ function TeacherDashboard() {
     setCurrentGrade(grade.grade);
     setEditGrade(grade.grade); // Pre-fill the input field with current grade
     setIsFormVisible(true); // Show the grade input form
+  };
+
+  // Handle star form submission
+  const handleStarSubmit = (event, studentId) => {
+    event.preventDefault();
+    const newStarCount = parseInt(starInput, 10);
+    if (!isNaN(newStarCount) && newStarCount >= 0) {
+      setStars((prevStars) => {
+        const newStars = { ...prevStars };
+        newStars[studentId] = newStarCount; // Set the new star count for the student
+        return newStars;
+      });
+      setEditingStarsFor(null); // Close the star edit form
+      setStarInput(""); // Reset star input field
+      alert("Stars updated successfully!");
+    } else {
+      alert("Please enter a valid number of stars.");
+    }
   };
 
   // Render section content
@@ -138,8 +163,21 @@ function TeacherDashboard() {
                         onClick={() => handleGradeEditClick(grade)}
                         className="p-2 bg-green-500 rounded-full"
                       >
+                        {/* Placeholder for your edit icon */}
                         <img src="/src/assets/edit.svg" alt="Edit" style={{ width: "24px", height: "24px" }} />
                       </button>
+                      <div className="flex items-center gap-2">
+                        <span>Stars: {stars[grade.id] || 0}</span>
+                        <button
+                          onClick={() => {
+                            setEditingStarsFor(grade.id); // Open star edit form for this student
+                          }}
+                          className="p-2 bg-yellow-500 rounded-full"
+                        >
+                          {/* Star icon */}
+                          <img src="/src/assets/stars.svg" alt="Star" style={{ width: "24px", height: "24px" }} />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -154,11 +192,29 @@ function TeacherDashboard() {
                     />
                     <button
                       onClick={() => handleGradeUpdate(grade.id, editGrade)}
-                      className="bg-green-500 text-white p-2 ml-4 rounded-lg"
+                      className="bg-blue-500 text-white p-2 ml-4 rounded-lg"
                     >
                       Save
                     </button>
                   </div>
+                )}
+
+                {editingStarsFor === grade.id && (
+                  <form onSubmit={(e) => handleStarSubmit(e, grade.id)} className="mt-4">
+                    <input
+                      type="number"
+                      value={starInput}
+                      onChange={(e) => setStarInput(e.target.value)}
+                      className="p-2 border rounded-lg w-32"
+                      min="0"
+                    />
+                    <button
+                      type="submit"
+                      className="bg-blue-500 text-white p-2 ml-4 rounded-lg"
+                    >
+                      Save Stars
+                    </button>
+                  </form>
                 )}
               </div>
             ))}
@@ -172,7 +228,7 @@ function TeacherDashboard() {
           <div className="py-4 flex flex-col gap-5">
             {analytics.map((student) => (
               <div key={student.id} className="p-4 bg-gray-100 rounded-lg border border-gray-300">
-                <strong>{student.name}</strong> - Grade: {student.currentGrade}, Level: {student.level}, XP: {student.xp}, Badges: {student.badges.join(", ")}
+                <strong>{student.name}</strong> - Grade: {student.currentGrade}, Level: {student.level}, XP: {student.xp}, Badges: {student.badges.join(", ")}, Stars: {student.stars}
               </div>
             ))}
           </div>
@@ -245,12 +301,15 @@ function TeacherDashboard() {
           </span>
         </nav>
       </div>
-      <main className="p-8">{renderSectionContent()}</main>
+
+      <div>{renderSectionContent()}</div>
     </div>
   );
 }
 
 export default TeacherDashboard;
+
+
 
 
 
