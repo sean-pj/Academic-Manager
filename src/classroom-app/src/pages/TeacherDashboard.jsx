@@ -114,7 +114,7 @@ function TeacherDashboard() {
           <div className="py-4 flex flex-col gap-5">
             <p>No classes yet, click the button below to add a student!</p>
             <button
-              className="bg-blue-500 text-white p-2 rounded-lg w-32"
+              className="bg-green-500 text-white p-2 rounded-lg w-32"
               onClick={() => setIsFormVisible(true)}
             >
               Add Student
