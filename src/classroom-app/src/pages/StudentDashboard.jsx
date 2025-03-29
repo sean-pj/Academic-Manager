@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import CourseItem from "../components/CourseItem.jsx";
 import NavigationButton from "../components/NavigationButton.jsx";
 import ExperienceBar from "../components/ExperienceBar.jsx";
-import HomeworkItem from "../components/HomeworkItem.jsx";
+import AssignmentItem from "../components/AssignmentItem.jsx";
 import GradeItem from "../components/GradeItem.jsx";
 import UserProfile from "../components/StudentHome.jsx";
 import StarsCounter from "../components/StarsCounter.jsx";
@@ -70,13 +70,7 @@ function StudentDashboard() {
         <>
           <h2>Your Homework</h2>
           <div className="py-4 flex flex-col gap-5">
-            {assignments.map((assignment) => (
-              <HomeworkItem
-                key={assignment.id}
-                title={assignment.title}
-                dueDate={assignment.dueDate}
-              />
-            ))}
+              <AssignmentItem></AssignmentItem>
           </div>
         </>
       );

@@ -16,4 +16,9 @@ class ClassroomView(viewsets.ModelViewSet):
     #permission_classes = [AllowAny]
 
     def get_queryset(self):
-        return Classrooms.objects.filter(students=self.request.user.student)
+        if (hasattr(self.request.user, 'student')):
+            return Classrooms.objects.filter(students=self.request.user.student)
+        elif (hasattr(self.request.user, 'teacher')):
+            return Classrooms.objects.filter(teacher=self.request.user.teacher)
+        else:
+            return Classrooms.objects.all()

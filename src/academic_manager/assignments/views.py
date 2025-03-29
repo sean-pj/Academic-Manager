@@ -11,6 +11,7 @@ def index(request):
 class AssignmentView(viewsets.ModelViewSet):
     queryset = Assignments.objects.all()
     serializer_class = AssignmentSerializer
+    permission_classes = [AllowAny]
     
     #Uncomment below, if you want access to BACKEND website access
     #permission_classes = [AllowAny]

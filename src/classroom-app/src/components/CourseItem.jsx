@@ -9,7 +9,6 @@ function CourseItem() {
     const getData = async () => {
       const result = await get("/classrooms/");
       setClassrooms(result);
-      console.log(result)
     };
     getData();
   }, []);
@@ -21,12 +20,14 @@ function CourseItem() {
   }
 
   return (
-    classrooms.map((room) => (
-      <div className="p-3 border-2 border-gray-300 rounded-lg bg-white flex justify-between items-center">
-        <span className="font-medium text-gray-800" key={`title ${room.id}`}>{room.title} - {room.sectionName} </span>
-        <span className="text-sm text-gray-500" key={`teacher ${room.id}`}>Teacher: {room.teacher.first_name} {room.teacher.last_name}</span>
-      </div>
-    ))
+    <div className="p-3 border-2 border-gray-300 rounded-lg bg-white flex justify-between items-center">
+      {classrooms.map((room) => (
+        <>
+          <span key={`title ${room.id}`} className="font-medium text-gray-800">{room.title} - {room.sectionName} </span>
+          <span key={`teacher ${room.id}`} className="text-sm text-gray-500">Teacher: {room.teacher.first_name} {room.teacher.last_name}</span>
+        </>
+      ))}
+    </div>
   );
 }
 
