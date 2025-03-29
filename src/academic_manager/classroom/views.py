@@ -14,3 +14,6 @@ class ClassroomView(viewsets.ModelViewSet):
     
     #Uncomment below, if you want access to BACKEND website access
     #permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        return Classrooms.objects.filter(students=self.request.user.student)
