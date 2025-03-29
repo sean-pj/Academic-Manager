@@ -40,8 +40,34 @@ function StudentDashboard() {
 
   const handleSubmitFile = (event) => {
     event.preventDefault();
+
     if (file) {
-      alert("File submitted successfully!");
+      //  BACKEND API CALL GOES HERE 
+      // Example: Use fetch or axios to send `file` and `assignment` info to the Django backend.
+      // You can use FormData to send a multipart/form-data request.
+
+      /*
+      const formData = new FormData();
+      formData.append("assignment_title", stubAssignments.find(a => a.id === openFormId)?.title);
+      formData.append("uploaded_file", file);
+
+      fetch("http://localhost:8000/upload/", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => {
+          if (!response.ok) throw new Error("Failed to upload");
+          alert("File submitted successfully!");
+        })
+        .catch((error) => {
+          alert("Error submitting file");
+          console.error(error);
+        });
+      */
+
+      //  END API CALL 
+
+      alert("File submitted successfully!"); // TEMPORARY – this would be removed once API is active
       setFile(null);
       setOpenFormId(null);
     } else {
@@ -107,14 +133,14 @@ function StudentDashboard() {
                     <div className="flex gap-3">
                       <button
                         type="submit"
-                         className="bg-green-500 text-white p-2 rounded-full w-30 flex justify-center"
+                        className="bg-green-500 text-white p-2 rounded-full px-6 flex justify-center"
                       >
-                        Submit 
+                        Submit
                       </button>
                       <button
                         type="button"
                         onClick={() => setOpenFormId(null)}
-                          className="bg-black text-white p-2 rounded-full w-30 flex justify-center"
+                        className="bg-black text-white p-2 rounded-full px-6 flex justify-center"
                       >
                         Cancel
                       </button>
@@ -198,6 +224,7 @@ function StudentDashboard() {
 }
 
 export default StudentDashboard;
+
 
 
 
