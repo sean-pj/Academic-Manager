@@ -28,3 +28,7 @@ db.sqlite3
 
 # Don't ignore __init__ files
 !**/migrations/__init__.py
+
+# Ignore media folders
+media/
+pdf/
