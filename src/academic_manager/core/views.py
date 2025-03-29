@@ -1,10 +1,11 @@
 from django.shortcuts import render
 
 #REST
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets
 from django.contrib.auth.models import User
 from .serializers import UserSerializer
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 # Create your views here.
 def index(request):
@@ -13,8 +14,12 @@ def index(request):
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
-    authentication_classes = []
     queryset = User.objects.all()
+
+    def get_permissions(self):
+        if self.action == 'create':
+            return [AllowAny()]
+        return [IsAuthenticated()]
 
     def get_queryset(self):
         # Only return the active users object
