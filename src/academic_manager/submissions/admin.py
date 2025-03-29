@@ -15,4 +15,6 @@ class SubmissionsAdmin(admin.ModelAdmin):
 
 
 # Register your models here.
-admin.site.register(Submissions, SubmissionsAdmin)
+# Submissions Admin is bugged
+# admin.site.register(Submissions, SubmissionsAdmin)
+admin.site.register(Submissions)

@@ -150,7 +150,29 @@ function TeacherDashboard() {
         <>
           <h2>Manage Grades</h2>
           <div className="py-4 flex flex-col gap-5">
-            {grades.map((grade) => (
+            <GradeItem></GradeItem>
+          </div>
+        </>
+      );
+    } else if (selectedSection === "analytics") {
+      return (
+        <>
+          <h2>Student Analytics</h2>
+          <div className="py-4 flex flex-col gap-5">
+            {analytics.map((student) => (
+              <div key={student.id} className="p-4 bg-gray-100 rounded-lg border border-gray-300">
+                <strong>{student.name}</strong> - Grade: {student.currentGrade}, Level: {student.level}, XP: {student.xp}, Badges: {student.badges.join(", ")}, Stars: {student.stars}
+              </div>
+            ))}
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <h2>Welcome, Teacher!</h2>
+          <p className="text-gray-600">Today is {today}</p>
+          {grades.map((grade) => (
               <div key={grade.id} className="p-4 bg-gray-100 rounded-lg mb-4 border border-gray-300">
                 <div className="flex justify-between">
                   <div className="flex gap-4 items-center">
@@ -217,28 +239,6 @@ function TeacherDashboard() {
                   </form>
                 )}
               </div>
-            ))}
-          </div>
-        </>
-      );
-    } else if (selectedSection === "analytics") {
-      return (
-        <>
-          <h2>Student Analytics</h2>
-          <div className="py-4 flex flex-col gap-5">
-            {analytics.map((student) => (
-              <div key={student.id} className="p-4 bg-gray-100 rounded-lg border border-gray-300">
-                <strong>{student.name}</strong> - Grade: {student.currentGrade}, Level: {student.level}, XP: {student.xp}, Badges: {student.badges.join(", ")}, Stars: {student.stars}
-              </div>
-            ))}
-          </div>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <h2>Welcome, Teacher!</h2>
-          <p className="text-gray-600">Today is {today}</p>
         </>
       );
     }

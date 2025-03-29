@@ -17,6 +17,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
 
     def get_permissions(self):
+        # Only allow POST requests without authentication
         if self.action == 'create':
             return [AllowAny()]
         return [IsAuthenticated()]
