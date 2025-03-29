@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 
 function StudentDashboard() {
   const [selectedSection, setSelectedSection] = useState("dashboard");
+  const [file, setFile] = useState(null);
+  const [openFormId, setOpenFormId] = useState(null);
   const navigate = useNavigate();
 
   // Stub data for Homework assignments
@@ -18,21 +20,35 @@ function StudentDashboard() {
     {
       id: 1,
       title: "Math Assignment 1",
-      dueDate: "2025-04-10",
+      dueDate: "Due: 2025-04-10",
     },
     {
       id: 2,
       title: "History Assignment 2",
-      dueDate: "2025-04-12",
+      dueDate: "Due: 2025-04-12",
     },
     {
       id: 3,
       title: "Science Assignment 3",
-      dueDate: "2025-04-15",
+      dueDate: "Due: 2025-04-15",
     },
   ];
 
-  // Render section content
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleSubmitFile = (event) => {
+    event.preventDefault();
+    if (file) {
+      alert("File submitted successfully!");
+      setFile(null);
+      setOpenFormId(null);
+    } else {
+      alert("Please select a file to submit.");
+    }
+  };
+
   const renderSectionContent = () => {
     if (selectedSection === "courses") {
       return (
@@ -60,10 +76,51 @@ function StudentDashboard() {
             {stubAssignments.map((assignment) => (
               <div
                 key={assignment.id}
-                className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow-md"
+                className="bg-gray-100 p-4 rounded-lg shadow-md flex flex-col gap-2"
               >
-                <span className="font-semibold">{assignment.title}</span>
-                <span className="text-sm text-gray-500">{assignment.dueDate}</span>
+                <div className="flex justify-between items-start">
+                  <div className="flex flex-col">
+                    <span className="font-semibold text-lg">{assignment.title}</span>
+                    <span className="text-sm text-gray-500 pl-1">{assignment.dueDate}</span>
+                  </div>
+
+                  {/* Plus icon (only visible if form is not open for this assignment) */}
+                  {openFormId !== assignment.id && (
+                    <button
+                      onClick={() => setOpenFormId(assignment.id)}
+                      className="bg-green-500 text-white p-3 rounded-full flex items-center justify-center self-start"
+                    >
+                      <img src="/src/assets/plus.svg" alt="Plus" className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+
+                {/* File submission form (only for the active assignment) */}
+                {openFormId === assignment.id && (
+                  <form onSubmit={handleSubmitFile} className="mt-2 flex flex-col gap-3">
+                    <input
+                      type="file"
+                      onChange={handleFileChange}
+                      accept="application/pdf, image/*, .docx, .txt"
+                      className="border p-2 rounded-lg"
+                    />
+                    <div className="flex gap-3">
+                      <button
+                        type="submit"
+                         className="bg-green-500 text-white p-2 rounded-full w-30 flex justify-center"
+                      >
+                        Submit 
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setOpenFormId(null)}
+                          className="bg-black text-white p-2 rounded-full w-30 flex justify-center"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                )}
               </div>
             ))}
           </div>
@@ -141,5 +198,8 @@ function StudentDashboard() {
 }
 
 export default StudentDashboard;
+
+
+
 
 
