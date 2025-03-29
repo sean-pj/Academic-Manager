@@ -4,7 +4,7 @@ from django.shortcuts import render
 from rest_framework import viewsets, permissions
 from django.contrib.auth.models import User
 from .serializers import UserSerializer
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny
 
 # Create your views here.
 def index(request):
@@ -12,16 +12,10 @@ def index(request):
 
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [AllowAny]
+    authentication_classes = []
     queryset = User.objects.all()
 
-    # def get_permissions(self):
-    #     #Dynamic permissions, allow POST requests, prevent GET requests
-    #     if self.action in ['create']: # If GET require authentication
-    #         return [permissions.AllowAny]
-    #     else:
-    #         return [permissions.IsAuthenticated] 
-
     def get_queryset(self):
-        # Only return users that belong to the currently authenticated user
+        # Only return the active users object
         return User.objects.filter(id=self.request.user.id)
