@@ -11,9 +11,11 @@ function TeacherDashboard() {
   const [grades, setGrades] = useState([]);
   const [analytics, setAnalytics] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const [editGrade, setEditGrade] = useState(""); // To store edited grade for individual students
+  const [currentGrade, setCurrentGrade] = useState(""); // To store current grade
 
   // Form states for new student data
-  const [studentUsername, setStudentUsername] = useState(""); // Changed from studentName to studentUsername
+  const [studentUsername, setStudentUsername] = useState("");
 
   const navigate = useNavigate();
 
@@ -25,49 +27,57 @@ function TeacherDashboard() {
     day: "numeric",
   });
 
-  // Fetch data for the selected section
+  // Simulated data for grades (stub data)
+  const simulatedGrades = [
+    { id: 1, student: "Emma Johnson", course: "Basic Math", grade: "A" },
+    { id: 2, student: "Liam Smith", course: "Science Experiments", grade: "B" },
+    { id: 3, student: "Sophia Brown", course: "Creative Writing", grade: "A-" },
+    { id: 4, student: "Noah Williams", course: "Advanced Algebra", grade: "C+" },
+  ];
+
   const fetchData = (section) => {
-    if (section === "courses") {
-      // Simulate the courses section content
+    if (section === "students") {
+      // Placeholder for student data
     } else if (section === "grades") {
-      const simulatedGrades = [
-        { id: 1, courseName: "Basic Math", grade: "A" },
-        { id: 2, courseName: "Science Experiments", grade: "B" },
-        { id: 3, courseName: "Creative Writing", grade: "A-" },
-      ];
-      setGrades(simulatedGrades);
+      setGrades(simulatedGrades); // Setting simulated grades for now
     } else if (section === "analytics") {
       const simulatedAnalytics = [
-        { id: 1, name: "Emma Johnson", currentGrade: 92, level: 5, xp: 1500, badges: ["Math Whiz", "Creative Thinker"] },
+        { id: 1, name: "Emma Johnson", currentGrade: 92, level: 5, xp: 1500, badges: ["Math Whiz"] },
         { id: 2, name: "Liam Smith", currentGrade: 88, level: 4, xp: 1200, badges: ["Science Explorer"] },
-        { id: 3, name: "Sophia Brown", currentGrade: 95, level: 6, xp: 1800, badges: ["Writing Star", "History Buff"] },
-        { id: 4, name: "Noah Williams", currentGrade: 79, level: 3, xp: 900, badges: ["Diligent Learner"] },
-        { id: 5, name: "Olivia Davis", currentGrade: 85, level: 4, xp: 1100, badges: ["Music Enthusiast", "Participation Pro"] },
+        // Additional students here...
       ];
       setAnalytics(simulatedAnalytics);
     }
   };
 
-  // Form submission handling
+  // Handle form submission for adding a student (example, stubbed for now)
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const studentData = {
-      name: studentUsername, // Send the username
-    };
+    const studentData = { name: studentUsername };
 
-    // Replace with API call to submit data to Django backend
-    // const response = await fetch("API_URL_HERE", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(studentData),
-    // });
-
-    // Assuming the response is successful:
+    // Simulate API call
     alert("Student added successfully!");
-    setIsFormVisible(false); // Hide the form after submission
+    setIsFormVisible(false); // Hide form after submission
+  };
+
+  // Handle updating grades (simulate API interaction)
+  const handleGradeUpdate = async (studentId, updatedGrade) => {
+    setGrades((prevGrades) =>
+      prevGrades.map((grade) =>
+        grade.id === studentId ? { ...grade, grade: updatedGrade } : grade
+      )
+    );
+
+    // Simulated API call to update the grade in the backend
+    alert("Grade updated successfully!");
+  };
+
+  // Handle grade edit toggle
+  const handleGradeEditClick = (grade) => {
+    setCurrentGrade(grade.grade);
+    setEditGrade(grade.grade); // Pre-fill the input field with current grade
+    setIsFormVisible(true); // Show the grade input form
   };
 
   // Render section content
@@ -77,9 +87,9 @@ function TeacherDashboard() {
         <>
           <h2>Your Students</h2>
           <div className="py-4 flex flex-col gap-5">
-            <p>No students yet, click the button below to add a student!</p>
+            <p>No classes yet, click the button below to add a student!</p>
             <button
-              className="bg-green-500 text-white p-2 rounded-lg w-32"
+              className="bg-blue-500 text-white p-2 rounded-lg w-32"
               onClick={() => setIsFormVisible(true)}
             >
               Add Student
@@ -90,13 +100,13 @@ function TeacherDashboard() {
           {isFormVisible && (
             <form onSubmit={handleSubmit} className="mt-5 p-4 border rounded-lg w-60">
               <div>
-                <label className="block" htmlFor="studentUsername">Username</label>
+                <label className="block" htmlFor="studentUserName">Username</label>
                 <input
                   type="text"
-                  id="studentUsername" // Corrected input ID
-                  value={studentUsername} // Updated to studentUsername
-                  onChange={(e) => setStudentUsername(e.target.value)} 
-                  className="p-2 border rounded-lg w-full" 
+                  id="studentUserName"
+                  value={studentUsername}
+                  onChange={(e) => setStudentUsername(e.target.value)}
+                  className="p-2 border rounded-lg w-50"
                   required
                 />
               </div>
@@ -113,14 +123,44 @@ function TeacherDashboard() {
     } else if (selectedSection === "grades") {
       return (
         <>
-          <h2>Your Grades</h2>
+          <h2>Manage Grades</h2>
           <div className="py-4 flex flex-col gap-5">
             {grades.map((grade) => (
-              <GradeItem
-                key={grade.id}
-                title={grade.courseName}
-                mark={grade.grade}
-              />
+              <div key={grade.id} className="p-4 bg-gray-100 rounded-lg mb-4 border border-gray-300">
+                <div className="flex justify-between">
+                  <div className="flex gap-4 items-center">
+                    <div>
+                      <strong>{grade.student}</strong> - {grade.course}
+                    </div>
+                    <div className="flex gap-2 items-center">
+                      <span>Current Grade: {grade.grade}</span>
+                      <button
+                        onClick={() => handleGradeEditClick(grade)}
+                        className="p-2 bg-green-500 rounded-full"
+                      >
+                        <img src="/src/assets/edit.svg" alt="Edit" style={{ width: "24px", height: "24px" }} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {isFormVisible && currentGrade === grade.grade && (
+                  <div className="mt-4">
+                    <input
+                      type="text"
+                      value={editGrade}
+                      onChange={(e) => setEditGrade(e.target.value)}
+                      className="p-2 border rounded-lg w-32"
+                    />
+                    <button
+                      onClick={() => handleGradeUpdate(grade.id, editGrade)}
+                      className="bg-green-500 text-white p-2 ml-4 rounded-lg"
+                    >
+                      Save
+                    </button>
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </>
@@ -131,7 +171,7 @@ function TeacherDashboard() {
           <h2>Student Analytics</h2>
           <div className="py-4 flex flex-col gap-5">
             {analytics.map((student) => (
-              <div key={student.id} className="p-4 bg-gray-100 rounded-md">
+              <div key={student.id} className="p-4 bg-gray-100 rounded-lg border border-gray-300">
                 <strong>{student.name}</strong> - Grade: {student.currentGrade}, Level: {student.level}, XP: {student.xp}, Badges: {student.badges.join(", ")}
               </div>
             ))}
@@ -157,13 +197,13 @@ function TeacherDashboard() {
           </span>
           <span className="w-full flex justify-center gap-5">
             <NavigationButton
-              imgSrc="\src\assets\school.svg"
+              imgSrc="/src/assets/school.svg"
               onClick={() => setSelectedSection("dashboard")}
               other={"bg-green-400 text-black"}
               text="HOME"
             />
             <NavigationButton
-              imgSrc="\src\assets\folder-open.svg"
+              imgSrc="/src/assets/folder-open.svg"
               onClick={() => {
                 setSelectedSection("students");
                 fetchData("students");
@@ -172,7 +212,7 @@ function TeacherDashboard() {
               text="STUDENTS"
             />
             <NavigationButton
-              imgSrc="\src\assets\notebook-pen.svg"
+              imgSrc="/src/assets/notebook-pen.svg"
               onClick={() => {
                 setSelectedSection("analytics");
                 fetchData("analytics");
@@ -181,9 +221,10 @@ function TeacherDashboard() {
               text="ANALYTICS"
             />
             <NavigationButton
-              imgSrc="\src\assets\manage.svg"
+              imgSrc="/src/assets/manage.svg"
               onClick={() => {
-                setSelectedSection("manage");
+                setSelectedSection("grades");
+                fetchData("grades");
               }}
               other={"bg-purple-300 text-black"}
               text="MANAGE"
@@ -193,7 +234,7 @@ function TeacherDashboard() {
           {/* Logout */}
           <span className="top-4 right-4 absolute flex justify-end">
             <NavigationButton
-              imgSrc="\src\assets\log-out.svg"
+              imgSrc="/src/assets/log-out.svg"
               onClick={() => {
                 logout();
                 navigate("/");
@@ -210,6 +251,9 @@ function TeacherDashboard() {
 }
 
 export default TeacherDashboard;
+
+
+
 
 
 
