@@ -6,7 +6,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 class Grades(models.Model):
     # Store the variables for this class
-    comments = models.TextField() # Comments
+    comments = models.TextField(blank=True, null=True) # Comments
     mark = models.DecimalField(max_digits=5, decimal_places=2, validators=[MinValueValidator(0), MaxValueValidator(100)]) # Mark (ex. ###.##)
     submission = models.OneToOneField(Submissions, on_delete=models.CASCADE)
 

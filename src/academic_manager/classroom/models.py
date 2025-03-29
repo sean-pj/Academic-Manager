@@ -8,7 +8,7 @@ class Classrooms(models.Model):
     # Store course's section (Letter), course (many-to-one), teacher (many-to-one), students (many-to-many --subject to deletion), schedule
     sectionName = models.CharField(max_length=255)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)  
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name="classrooms")  
     students = models.ManyToManyField(Student)
     schedule = models.CharField(max_length=255)
 

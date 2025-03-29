@@ -12,32 +12,8 @@ import { useNavigate } from "react-router-dom";
 
 function StudentDashboard() {
   const [selectedSection, setSelectedSection] = useState("dashboard");
-  const [grades, setGrades] = useState([]);
-  const [assignments, setAssignments] = useState([]);
-
   const navigate = useNavigate();
 
-
-  // Fetch data for the selected section
-  const fetchData = (section) => {
-    if (section === "courses") {
-      //
-    } else if (section === "grades") {
-      const simulatedGrades = [
-        { id: 1, courseName: "Basic Math", grade: "A" },
-        { id: 2, courseName: "Science Experiments", grade: "B" },
-        { id: 3, courseName: "Creative Writing", grade: "A-" },
-      ];
-      setGrades(simulatedGrades);
-    } else if (section === "assignments") {
-      const simulatedAssignments = [
-        { id: 1, title: "Math Homework", dueDate: "2023-10-15" },
-        { id: 2, title: "Science Project", dueDate: "2023-10-20" },
-        { id: 3, title: "Essay Draft", dueDate: "2023-10-18" },
-      ];
-      setAssignments(simulatedAssignments);
-    }
-  };
 
   // Render section content
   const renderSectionContent = () => {
@@ -55,13 +31,7 @@ function StudentDashboard() {
         <>
           <h2>Your Grades</h2>
           <div className="py-4 flex flex-col gap-5">
-            {grades.map((grade) => (
-              <GradeItem
-                key={grade.id}
-                title={grade.courseName}
-                mark={grade.grade}
-              />
-            ))}
+              <GradeItem></GradeItem>
           </div>
         </>
       );
@@ -115,7 +85,6 @@ function StudentDashboard() {
               imgSrc="\src\assets\folder-open.svg"
               onClick={() => {
                 setSelectedSection("courses");
-                fetchData("courses");
               }}
               other={"bg-blue-400 text-black"}
               text="CLASSES"
@@ -126,7 +95,6 @@ function StudentDashboard() {
               imgSrc="\src\assets\book-check.svg"
               onClick={() => {
                 setSelectedSection("grades");
-                fetchData("grades");
               }}
               other={"bg-red-400 text-black"}
               text="GRADES"
@@ -137,7 +105,6 @@ function StudentDashboard() {
               imgSrc="\src\assets\notebook-pen.svg"
               onClick={() => {
                 setSelectedSection("assignments");
-                fetchData("assignments");
               }}
               other={"bg-orange-300 text-black"}
               text="HOMEWORK"

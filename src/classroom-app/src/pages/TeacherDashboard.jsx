@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { get, logout } from "../services/api.js";
 import NavigationButton from "../components/NavigationButton.jsx";
-import HomeworkItem from "../components/HomeworkItem.jsx";
 import GradeItem from "../components/GradeItem.jsx";
 import CourseItem from "../components/CourseItem.jsx";
 import Header from "../homepage-components/Header.jsx";
@@ -69,13 +68,7 @@ function TeacherDashboard() {
         <>
           <h2>Your Grades</h2>
           <div className="py-4 flex flex-col gap-5">
-            {grades.map((grade) => (
-              <GradeItem
-                key={grade.id}
-                title={grade.courseName}
-                mark={grade.grade}
-              />
-            ))}
+            <GradeItem></GradeItem>
           </div>
         </>
       );
