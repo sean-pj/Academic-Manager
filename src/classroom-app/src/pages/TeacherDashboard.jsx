@@ -304,7 +304,7 @@ function TeacherDashboard() {
         </nav>
       </div>
 
-      <div>{renderSectionContent()}</div>
+      <div className="p-8">{renderSectionContent()}</div>
     </div>
   );
 }

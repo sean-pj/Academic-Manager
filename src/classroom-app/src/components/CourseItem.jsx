@@ -3,15 +3,23 @@ import { get } from "../services/api.js";
 
 function CourseItem() {
   const [classrooms, setClassrooms] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Api call
   useEffect(() => {
     const getData = async () => {
       const result = await get("/classrooms/");
       setClassrooms(result);
+      setLoading(false);
     };
     getData();
   }, []);
+
+  if (loading) {
+    return (
+      <p>Loading...</p>
+    )
+  }
 
   if (classrooms?.length == 0 ) {
     return (
