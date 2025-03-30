@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../services/api.js";
 
 function TeacherSignup() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [firstname, setFirstName] = useState('');
-  const [lastname, setLastName] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
+
+  const [formErrors, setFormErrors] = useState({}); // Hold JSON error response data
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -20,12 +22,17 @@ function TeacherSignup() {
         email: email,
         first_name: firstname,
         last_name: lastname,
-        role: 'teacher'
+        role: "teacher",
       });
       console.log(response);
       navigate("/login");
     } catch (err) {
-      console.log(err);
+      if (err.response && err.response.data) {
+        setFormErrors(err.response.data);
+      } else {
+        console.error(err);
+        alert("Something went wrong");
+      }
     }
   };
 
@@ -35,7 +42,9 @@ function TeacherSignup() {
         <h2 className="text-center text-2xl font-bold mb-6">Teacher Signup</h2>
         <form onSubmit={handleSignup}>
           <div className="mb-4">
-            <label htmlFor="username" className="block text-gray-700">Username</label>
+            <label htmlFor="username" className="block text-gray-700">
+              Username
+            </label>
             <input
               type="text"
               id="username"
@@ -44,9 +53,16 @@ function TeacherSignup() {
               onChange={(e) => setUsername(e.target.value)}
               required
             />
+            {formErrors.username && (
+              <p className="text-red-500 text-sm mt-1">
+                {formErrors.username[0]}
+              </p>
+            )}
           </div>
           <div className="mb-6">
-            <label htmlFor="password" className="block text-gray-700">Password</label>
+            <label htmlFor="password" className="block text-gray-700">
+              Password
+            </label>
             <input
               type="password"
               id="password"
@@ -55,20 +71,35 @@ function TeacherSignup() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            {formErrors.password && (
+              <p className="text-red-500 text-sm mt-1">
+                {formErrors.password[0]}
+              </p>
+            )}
           </div>
           <div className="mb-6">
-            <label htmlFor="email" className="block text-gray-700">Email</label>
+            <label htmlFor="email" className="block text-gray-700">
+              Email
+            </label>
             <input
               type="email"
               id="email"
               className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setFormErrors((prev) => ({ ...prev, email: null }));
+              }}
               required
             />
+            {formErrors.email && (
+              <p className="text-red-500 text-sm mt-1">{formErrors.email[0]}</p>
+            )}
           </div>
           <div className="mb-6">
-            <label htmlFor="firstname" className="block text-gray-700">First Name</label>
+            <label htmlFor="firstname" className="block text-gray-700">
+              First Name
+            </label>
             <input
               type="text"
               id="firstname"
@@ -77,9 +108,16 @@ function TeacherSignup() {
               onChange={(e) => setFirstName(e.target.value)}
               required
             />
+            {formErrors.first_name && (
+              <p className="text-red-500 text-sm mt-1">
+                {formErrors.first_name[0]}
+              </p>
+            )}
           </div>
           <div className="mb-6">
-            <label htmlFor="lastname" className="block text-gray-700">Last Name</label>
+            <label htmlFor="lastname" className="block text-gray-700">
+              Last Name
+            </label>
             <input
               type="text"
               id="lastname"
@@ -88,6 +126,11 @@ function TeacherSignup() {
               onChange={(e) => setLastName(e.target.value)}
               required
             />
+            {formErrors.last_name && (
+              <p className="text-red-500 text-sm mt-1">
+                {formErrors.last_name[0]}
+              </p>
+            )}
           </div>
           <button
             type="submit"
@@ -112,4 +155,3 @@ function TeacherSignup() {
 }
 
 export default TeacherSignup;
-
