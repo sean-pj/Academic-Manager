@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { get } from "../../services/api";
+import api, { get } from "../../services/api";
 function Students() {
 
     const [isFormVisible, setIsFormVisible] = useState(false);
@@ -8,18 +8,35 @@ function Students() {
     const [students, setStudents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [duedate, setDueDate] = useState("");
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      try {
+        const response = await api.post("/teachers/", {
+          student_username: studentUsername
+      }, {
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+      })
+        console.log(response)
+      } catch (err) {
+        throw err
+      }
+    }
     
     // Api call
     useEffect(() => {
       const getData = async () => {
         const result = await get("/students/");
         setStudents(result);
-        console.log(result)
+        // console.log(result)
       };
       getData();
       setLoading(false);
       
-    }, []);
+    }, [handleSubmit]);
 
     if (loading) {
       <h2>Loading...</h2>
@@ -29,10 +46,6 @@ function Students() {
       return (
         <p>No students yet</p>
       )
-    }
-
-    const handleSubmit = () => {
-        
     }
 
     return (
@@ -55,7 +68,7 @@ function Students() {
               })}
             <button
               className="bg-green-500 text-white p-2 rounded-lg w-32"
-              onClick={() => setIsFormVisible(true)}
+              onClick={() => setIsFormVisible(!isFormVisible)}
             >
               Add Student
             </button>

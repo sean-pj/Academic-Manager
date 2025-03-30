@@ -34,7 +34,7 @@ function GradeItem() {
     <div>
       {grades.map((grade) => {
         return (
-          <div className="p-3 border-2 border-gray-300 rounded-lg bg-white flex justify-between items-center">
+          <div key={grade.id} className="p-3 border-2 border-gray-300 rounded-lg bg-white flex justify-between items-center">
               <span key={`title ${grade.id}`} className="font-medium text-gray-800">{grade.submission.assignment.title} | Grade: {grade.mark}% </span>
               <span key={`due ${grade.id}`} className="text-sm text-gray-500"> Student: {grade.submission.student.first_name} {grade.submission.student.last_name}</span>
           </div>
