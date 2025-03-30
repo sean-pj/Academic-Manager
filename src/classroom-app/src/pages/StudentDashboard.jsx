@@ -3,7 +3,7 @@ import CourseItem from "../components/CourseItem.jsx";
 import NavigationButton from "../components/NavigationButton.jsx";
 import ExperienceBar from "../components/ExperienceBar.jsx";
 import GradeItem from "../components/GradeItem.jsx";
-import UserProfile from "../components/StudentHome.jsx";
+import UserProfile from "../components/UserProfile.jsx";
 import StarsCounter from "../components/StarsCounter.jsx";
 import Header from "../homepage-components/Header.jsx";
 import { logout } from "../services/api.js";
@@ -69,7 +69,7 @@ function StudentDashboard() {
       return (
         <div className="bg-white rounded-2xl outline-2 outline-gray-200 flex justify-center items-center gap-10">
           <div className="flex flex-col gap-8">
-            <UserProfile />
+            <UserProfile></UserProfile>
             <div>
               <p className="py-3">One more homework to finish until next level!</p>
               <ExperienceBar />

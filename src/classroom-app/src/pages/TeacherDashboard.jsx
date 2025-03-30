@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import Analytics from "./teacher-pages/Analytics.jsx";
 import Grades from "./teacher-pages/Grades.jsx";
 import Students from "./teacher-pages/Students.jsx";
+import UserProfile from "../components/UserProfile.jsx";
+import CourseItem from "../components/CourseItem.jsx";
 
 function TeacherDashboard() {
   const [selectedSection, setSelectedSection] = useState("dashboard");
@@ -35,18 +37,29 @@ function TeacherDashboard() {
           <Grades></Grades>
         </>
       )
-    } else if (selectedSection === "analytics") {
+    } else if (selectedSection === "classes") {
       return (
         <>
-          <h2>Student Analytics</h2>
-          <Analytics></Analytics>
+          <h2>Classes </h2>
+          <div className="py-4 flex flex-col gap-5">
+            <CourseItem></CourseItem>
+            <h2>Student Analytics</h2>
+            <Analytics></Analytics>
+          </div>
         </>
       );
     } else {
       return (
         <>
-          <h2>Welcome, Teacher!</h2>
-          <p className="text-gray-600">Today is {today}</p>
+          <div className="bg-white rounded-2xl outline-2 outline-gray-200 flex justify-center items-center gap-10">
+          <div className="flex flex-col gap-8">
+            <UserProfile></UserProfile>
+            <div>
+              <p className="py-3">Have a great day!</p>
+            </div>
+          </div>
+          <img src="\src\assets\teacher.jpg" className="w-[400px]" alt="Illustration" />
+        </div>
          
         </>
       );
@@ -78,10 +91,10 @@ function TeacherDashboard() {
             <NavigationButton
               imgSrc="/src/assets/notebook-pen.svg"
               onClick={() => {
-                setSelectedSection("analytics");
+                setSelectedSection("classes");
               }}
               other={"bg-orange-300 text-black"}
-              text="ANALYTICS"
+              text="CLASSES"
             />
             <NavigationButton
               imgSrc="/src/assets/manage.svg"

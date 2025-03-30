@@ -10,3 +10,4 @@ class StudentSerializer(serializers.ModelSerializer):
         model = Student
         #fields = ['id', 'first_name', 'last_name', 'student_id', 'date_of_birth']
         fields = '__all__'
+        fields = ['id', 'first_name', 'last_name', 'username', 'date_of_birth']

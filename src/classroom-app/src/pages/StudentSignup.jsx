@@ -31,6 +31,7 @@ function StudentSignup() {
       console.log(response)
       navigate("/login")
     } catch (err) {
+      alert("Username is already taken.")
       console.log(err)
     }
   };

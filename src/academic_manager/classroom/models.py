@@ -9,7 +9,7 @@ class Classrooms(models.Model):
     sectionName = models.CharField(max_length=255)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name="classrooms")  
-    students = models.ManyToManyField(Student)
+    students = models.ManyToManyField(Student, related_name="classrooms")
     schedule = models.CharField(max_length=255)
 
     # Forcibily changes the name in the admin site to Classrooms instead of "ss"

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { get } from "../services/api.js";
 
-function StudentHome() {
+function UserProfile() {
   const [user, setUser] = useState();
 
   // Get the date
@@ -31,4 +31,4 @@ function StudentHome() {
   );
 }
 
-export default StudentHome;
+export default UserProfile;
