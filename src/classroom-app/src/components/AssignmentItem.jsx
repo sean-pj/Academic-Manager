@@ -17,14 +17,20 @@ function AssignmentItem() {
     
   }, []);
 
-  if (loading || assignments?.length == 0) {
+  if (loading) {
+    return (
+      <h2>Loading... </h2>
+    )
+  }
+
+  if (assignments?.length == 0) {
     return (
       <p>No classes yet! Talk with your teacher.</p>
     )
   }
 
   return (
-    <div className="p-3 border-2 border-gray-300 rounded-lg bg-white flex justify-between items-center">
+    <div>
       {assignments.map((assignment) => {
         
         const dueDate = new Date(assignment.due_date);
@@ -40,10 +46,10 @@ function AssignmentItem() {
         });
 
         return (
-            <>
+          <div className="p-3 border-2 border-gray-300 rounded-lg bg-white flex justify-between items-center">
                 <span key={`title ${assignment.id}`} className="font-medium text-gray-800">{assignment.title} </span>
                 <span key={`due ${assignment.id}`} className="text-sm text-gray-500">Due: {formattedDueDate}</span>
-            </>
+          </div>
         )
       })}
     </div>
