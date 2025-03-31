@@ -28,12 +28,12 @@ function CourseItem() {
   }
 
   return (
-    <div className="p-3 border-2 border-gray-300 rounded-lg bg-white flex justify-between items-center">
+    <div>
       {classrooms.map((room) => (
-        <>
+        <div key={room.id} className="p-3 border-2 border-gray-300 rounded-lg bg-white flex justify-between items-center">
           <span key={`title ${room.id}`} className="font-medium text-gray-800">{room.title} - {room.sectionName} </span>
           <span key={`teacher ${room.id}`} className="text-sm text-gray-500">Teacher: {room.teacher.first_name} {room.teacher.last_name}</span>
-        </>
+        </div>
       ))}
     </div>
   );

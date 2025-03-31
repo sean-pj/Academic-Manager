@@ -72,16 +72,20 @@ export const get = async (endpoint) => {
     return await response.data;
 
   } catch (error) {
+    try {
+      // If the current access token is expired, attempt to refresh
+      if (error.response && error.response.status === 401) {
+        console.log('Access token expired. Refreshing token');
+        
+        const newToken = await refreshAuthToken();
+          api.defaults.headers['Authorization'] = `Bearer ${newToken}`;
 
-    // If the current access token is expired, attempt to refresh
-    if (error.response && error.response.status === 401) {
-      console.log('Access token expired. Refreshing token');
-      
-      const newToken = await refreshAuthToken();
-        api.defaults.headers['Authorization'] = `Bearer ${newToken}`;
-
-        const response = await api.get(endpoint);
-        return await response.data;
+          const response = await api.get(endpoint);
+          return await response.data;
+      }
+    } catch(refresh_error) {
+      console.log("No refresh token available")
+      return []
     }
 
     console.error('API call failed');
