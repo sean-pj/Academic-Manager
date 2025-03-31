@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../services/api.js";
 
 function StudentSignup() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [firstname, setFirstName] = useState('');
-  const [lastname, setLastName] = useState('');
-  const [birthdayMonth, setBirthdayMonth] = useState('');
-  const [birthdayDay, setBirthdayDay] = useState('');
-  const [birthdayYear, setBirthdayYear] = useState('');
-  const [grade, setGrade] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [birthdayMonth, setBirthdayMonth] = useState("");
+  const [birthdayDay, setBirthdayDay] = useState("");
+  const [birthdayYear, setBirthdayYear] = useState("");
+  const [grade, setGrade] = useState("");
+  const [formErrors, setFormErrors] = useState({}); // Hold JSON error response data
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -26,19 +27,39 @@ function StudentSignup() {
         last_name: lastname,
         birthday: `${birthdayYear}-${birthdayMonth}-${birthdayDay}`,
         grade: grade,
-        role: 'student'
-      })
-      console.log(response)
-      navigate("/login")
+        role: "student",
+      });
+      console.log(response);
+      navigate("/login");
     } catch (err) {
-      alert("Username is already taken.")
-      console.log(err)
+      if (err.response && err.response.data) {
+        setFormErrors(err.response.data);
+      } else {
+        console.error(err);
+        alert("Username is already taken.");
+      }
     }
   };
 
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
-  const years = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i);
+  const years = Array.from(
+    { length: 100 },
+    (_, i) => new Date().getFullYear() - i
+  );
   const grades = Array.from({ length: 8 }, (_, i) => i + 1);
 
   return (
@@ -47,7 +68,9 @@ function StudentSignup() {
         <h2 className="text-center text-2xl font-bold mb-6">Student Signup</h2>
         <form onSubmit={handleSignup}>
           <div className="mb-4">
-            <label htmlFor="username" className="block text-gray-700">Username</label>
+            <label htmlFor="username" className="block text-gray-700">
+              Username
+            </label>
             <input
               type="text"
               id="username"
@@ -56,9 +79,16 @@ function StudentSignup() {
               onChange={(e) => setUsername(e.target.value)}
               required
             />
+            {formErrors.username && (
+              <p className="text-red-500 text-sm mt-1">
+                {formErrors.username[0]}
+              </p>
+            )}
           </div>
           <div className="mb-6">
-            <label htmlFor="password" className="block text-gray-700">Password</label>
+            <label htmlFor="password" className="block text-gray-700">
+              Password
+            </label>
             <input
               type="password"
               id="password"
@@ -67,9 +97,16 @@ function StudentSignup() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            {formErrors.password && (
+              <p className="text-red-500 text-sm mt-1">
+                {formErrors.password[0]}
+              </p>
+            )}
           </div>
           <div className="mb-6">
-            <label htmlFor="email" className="block text-gray-700">Email</label>
+            <label htmlFor="email" className="block text-gray-700">
+              Email
+            </label>
             <input
               type="email"
               id="email"
@@ -78,9 +115,14 @@ function StudentSignup() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
+            {formErrors.email && (
+              <p className="text-red-500 text-sm mt-1">{formErrors.email[0]}</p>
+            )}
           </div>
           <div className="mb-6">
-            <label htmlFor="firstname" className="block text-gray-700">First Name</label>
+            <label htmlFor="firstname" className="block text-gray-700">
+              First Name
+            </label>
             <input
               type="text"
               id="firstname"
@@ -89,9 +131,16 @@ function StudentSignup() {
               onChange={(e) => setFirstName(e.target.value)}
               required
             />
+            {formErrors.first_name && (
+              <p className="text-red-500 text-sm mt-1">
+                {formErrors.first_name[0]}
+              </p>
+            )}
           </div>
           <div className="mb-6">
-            <label htmlFor="lastname" className="block text-gray-700">Last Name</label>
+            <label htmlFor="lastname" className="block text-gray-700">
+              Last Name
+            </label>
             <input
               type="text"
               id="lastname"
@@ -100,9 +149,16 @@ function StudentSignup() {
               onChange={(e) => setLastName(e.target.value)}
               required
             />
+            {formErrors.last_name && (
+              <p className="text-red-500 text-sm mt-1">
+                {formErrors.last_name[0]}
+              </p>
+            )}
           </div>
           <div className="mb-6">
-            <label htmlFor="birthday" className="block text-gray-700">Birthday</label>
+            <label htmlFor="birthday" className="block text-gray-700">
+              Birthday
+            </label>
             <div className="flex space-x-2">
               <select
                 id="birthdayMonth"
@@ -113,7 +169,9 @@ function StudentSignup() {
               >
                 <option value="">Month</option>
                 {months.map((month, idx) => (
-                  <option key={idx} value={idx}>{month}</option>
+                  <option key={idx} value={idx}>
+                    {month}
+                  </option>
                 ))}
               </select>
               <select
@@ -125,7 +183,9 @@ function StudentSignup() {
               >
                 <option value="">Day</option>
                 {days.map((day) => (
-                  <option key={day} value={day}>{day}</option>
+                  <option key={day} value={day}>
+                    {day}
+                  </option>
                 ))}
               </select>
               <select
@@ -137,13 +197,22 @@ function StudentSignup() {
               >
                 <option value="">Year</option>
                 {years.map((year) => (
-                  <option key={year} value={year}>{year}</option>
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
                 ))}
               </select>
             </div>
+            {formErrors.birthday && (
+              <p className="text-red-500 text-sm mt-1">
+                {formErrors.birthday[0]}
+              </p>
+            )}
           </div>
           <div className="mb-6">
-            <label htmlFor="grade" className="block text-gray-700">Grade</label>
+            <label htmlFor="grade" className="block text-gray-700">
+              Grade
+            </label>
             <select
               id="grade"
               className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -153,9 +222,14 @@ function StudentSignup() {
             >
               <option value="">Select Grade</option>
               {grades.map((grade) => (
-                <option key={grade} value={grade}>{grade}</option>
+                <option key={grade} value={grade}>
+                  {grade}
+                </option>
               ))}
             </select>
+            {formErrors.grade && (
+              <p className="text-red-500 text-sm mt-1">{formErrors.grade[0]}</p>
+            )}
           </div>
           <button
             type="submit"
@@ -180,5 +254,3 @@ function StudentSignup() {
 }
 
 export default StudentSignup;
-
-
