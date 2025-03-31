@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { get, logout } from "../services/api.js";
+import { fetchUsers, get, logout } from "../services/api.js";
 import NavigationButton from "../components/NavigationButton.jsx";
 import Header from "../homepage-components/Header.jsx";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import Grades from "./teacher-pages/Grades.jsx";
 import Students from "./teacher-pages/Students.jsx";
 import UserProfile from "../components/UserProfile.jsx";
 import CourseItem from "../components/CourseItem.jsx";
+import api from "../services/api.js";
 
 function TeacherDashboard() {
   const [selectedSection, setSelectedSection] = useState("dashboard");
@@ -36,7 +37,7 @@ function TeacherDashboard() {
         <>
           <Grades></Grades>
         </>
-      )
+      );
     } else if (selectedSection === "classes") {
       return (
         <>
@@ -52,19 +53,31 @@ function TeacherDashboard() {
       return (
         <>
           <div className="bg-white rounded-2xl outline-2 outline-gray-200 flex justify-center items-center gap-10">
-          <div className="flex flex-col gap-8">
-            <UserProfile></UserProfile>
-            <div>
-              <p className="py-3">Have a great day!</p>
+            <div className="flex flex-col gap-8">
+              <UserProfile></UserProfile>
+              <div>
+                <p className="py-3">Have a great day!</p>
+              </div>
             </div>
+            <img
+              src="\src\assets\teacher.jpg"
+              className="w-[400px]"
+              alt="Illustration"
+            />
           </div>
-          <img src="\src\assets\teacher.jpg" className="w-[400px]" alt="Illustration" />
-        </div>
-         
         </>
       );
     }
   };
+
+  useEffect(() => {
+    const loadUsers = async () => {
+      const users = await fetchUsers();
+      console.log(users);
+    };
+
+    loadUsers();
+  }, []);
 
   return (
     <div>
@@ -127,11 +140,3 @@ function TeacherDashboard() {
 }
 
 export default TeacherDashboard;
-
-
-
-
-
-
-
-
