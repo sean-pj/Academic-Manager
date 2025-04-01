@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Typography */
+  h1 {
+    @apply text-5xl font-bold text-gray-900;
+  }
+  h2 {
+    @apply text-4xl font-semibold text-gray-800;
+  }
+
+  /* Body & Layout */
+  body {
+    @apply bg-gray-100 text-gray-900 font-sans text-xl;
+  }
+
+  /* Buttons */
+  button {
+    @apply px-4 py-2 rounded-lg font-medium text-white bg-blue-500 hover:bg-blue-600 transition hover:cursor-pointer;
+  }
+  button:focus {
+    @apply ring-2 ring-blue-400 shadow-lg;
+  }
+}

@@ -1,0 +1,26 @@
+from django.test import Client, TestCase
+from django.urls import reverse
+from students.models import Student
+from django.contrib.auth.models import User
+import json
+
+
+# Create your tests here.
+class ApiTestCase(TestCase):
+    def setUp(self):
+        elvis = User.objects.create(username="user1", first_name="Elvis", last_name="Kuang")
+        s1 = Student.objects.create(user=elvis)
+
+    def test_students(self):
+        c = Client()
+
+        response = c.get("/api/students/")
+
+        self.assertEqual(response.status_code, 200)
+
+        response_json = response.json()[0]
+
+        self.assertEqual(response_json['id'], 1)
+        self.assertEqual(response_json['username'], "user1")
+        self.assertEqual(response_json['first_name'], "Elvis")
+        self.assertEqual(response_json['last_name'], "Kuang")
