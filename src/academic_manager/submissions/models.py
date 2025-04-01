@@ -4,7 +4,6 @@ from grades.models import *
 from students.models import *
 from assignments.models import Assignments
 
-
 # Create your models here.
 class Submissions(models.Model):
     # Store the variables for this class

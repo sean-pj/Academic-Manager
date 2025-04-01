@@ -13,7 +13,7 @@ class SubmissionView(viewsets.ModelViewSet):
     serializer_class = SubmissionSerializer
     
     #Uncomment below, if you want access to BACKEND website access
-    #permission_classes = [AllowAny]
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         if (hasattr(self.request.user, 'student')):
